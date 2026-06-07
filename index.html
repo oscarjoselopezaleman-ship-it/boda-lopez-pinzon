@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>López &amp; Pinzón · 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cinzel+Decorative:wght@400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --sage:#56664b;--sage-l:#7a8f6e;--sage-ll:#a8bba0;
+  --sage-d:#3a4733;--sage-dd:#2a3326;
+  --cream:#f8faf5;--cream-d:#eef2ea;--cream-dd:#dde6d8;
+  --gold:#9a8456;--gold-l:#c4aa7a;--gold-ll:#e8d9bc;
+  --white:#fff;--ink:#1e2a1a;--muted:#5a6e54;--border:#cfd9c8;
+}
+html,body{background:var(--cream);color:var(--ink);-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{font-family:'Cormorant Garamond',serif;font-weight:300;min-height:100vh}
+button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',serif;border-radius:0}
+
+/* SYNC INDICATOR */
+.sync-bar{background:var(--sage-dd);padding:6px 16px;display:flex;align-items:center;gap:8px;justify-content:center}
+.sync-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;flex-shrink:0}
+.sync-dot.off{background:#f87171}
+.sync-dot.loading{background:#fbbf24;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.sync-txt{font-family:'Cinzel',serif;font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+
+/* HEADER */
+.hdr{background:linear-gradient(165deg,var(--sage-dd) 0%,var(--sage-d) 50%,var(--sage) 100%);padding:44px 24px 28px;text-align:center;position:relative;overflow:hidden}
+.hdr::before{content:'';position:absolute;inset:0;opacity:.05;background-image:radial-gradient(circle,#fff 1px,transparent 1px);background-size:24px 24px;pointer-events:none}
+.hdr::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-l),transparent)}
+.hdr-pre{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.36em;color:var(--gold-ll);text-transform:uppercase;display:block;margin-bottom:14px;opacity:.8}
+.hdr-photo{width:104px;height:104px;border-radius:50%;border:2px solid var(--gold-l);margin:0 auto 14px;background:linear-gradient(135deg,var(--sage-l),var(--sage-d));display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 5px rgba(184,154,106,.15),0 8px 28px rgba(0,0,0,.32);font-size:40px}
+.hdr-title{font-family:'Cinzel Decorative',serif;font-size:clamp(19px,5vw,28px);font-weight:400;color:var(--white);letter-spacing:.05em;line-height:1.25;text-shadow:0 2px 18px rgba(0,0,0,.4)}
+.hdr-amp{color:var(--gold-ll);font-style:italic}
+.hdr-rule{display:flex;align-items:center;gap:10px;margin:12px auto;max-width:170px}
+.hdr-rule i{color:var(--gold-ll);font-size:15px;font-style:normal}
+.hdr-rule s{flex:1;height:1px;text-decoration:none}
+.hdr-rule s:first-child{background:linear-gradient(90deg,transparent,var(--gold-l))}
+.hdr-rule s:last-child{background:linear-gradient(90deg,var(--gold-l),transparent)}
+.hdr-year{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.28em;color:rgba(255,255,255,.45);display:block;margin-bottom:16px}
+.hdr-link{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border:1px solid rgba(196,170,122,.45);color:var(--gold-ll);font-family:'Cinzel',serif;font-size:8px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;background:rgba(154,132,86,.16)}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);background:var(--sage-dd)}
+.stat{text-align:center;padding:14px 4px;border-right:1px solid rgba(255,255,255,.07)}
+.stat:last-child{border-right:none}
+.stat-n{display:block;font-family:'Cinzel',serif;font-size:24px;font-weight:600;line-height:1}
+.stat-l{display:block;font-family:'Cinzel',serif;font-size:6px;letter-spacing:.13em;text-transform:uppercase;margin-top:4px;opacity:.45;color:#fff}
+
+/* PROGRESS */
+.prog-box{background:var(--white);border-bottom:1px solid var(--border)}
+.prog-row{padding:10px 18px;display:flex;align-items:center;gap:12px}
+.prog-row+.prog-row{border-top:1px solid var(--cream-dd)}
+.prog-lbl{font-family:'Cinzel',serif;font-size:7px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);width:86px;flex-shrink:0}
+.prog-track{flex:1;height:4px;background:var(--cream-dd);border-radius:99px;overflow:hidden}
+.prog-fill{height:100%;border-radius:99px;transition:width .5s ease}
+.prog-pct{font-family:'Cinzel',serif;font-size:10px;font-weight:600;color:var(--sage);width:30px;text-align:right}
+
+/* TABS */
+.tabs{background:var(--white);border-bottom:2px solid var(--cream-dd);display:flex}
+.tab-btn{flex:1;padding:13px 6px;font-family:'Cinzel',serif;font-size:7.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap}
+.tab-btn.on{color:var(--sage-d);border-bottom-color:var(--sage)}
+
+/* CONTROLS */
+.controls{padding:14px 16px 0;background:var(--cream)}
+.search-wrap{display:flex;align-items:center;gap:10px;background:var(--white);border:1px solid var(--border);border-radius:6px;padding:12px 16px;box-shadow:0 1px 5px rgba(86,102,75,.07)}
+.search-wrap input{border:none;outline:none;background:transparent;font-size:16px;color:var(--ink);flex:1;font-style:italic;min-width:0}
+.search-wrap input::placeholder{color:var(--sage-ll);font-style:italic}
+.clr{background:none;border:none;color:var(--sage-ll);font-size:22px;cursor:pointer;padding:0;line-height:1;display:none;flex-shrink:0}
+.filters{display:flex;gap:6px;padding:10px 0 14px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.filters::-webkit-scrollbar{display:none}
+.f-btn{flex-shrink:0;padding:7px 14px;border:1px solid var(--border);background:var(--white);color:var(--muted);font-family:'Cinzel',serif;font-size:7px;letter-spacing:.13em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.f-btn.on{background:var(--sage);border-color:var(--sage);color:var(--white)}
+
+/* SECTION HEADING */
+.sec-hd{display:flex;align-items:center;gap:10px;padding:16px 16px 8px}
+.sec-hd span{font-family:'Cinzel',serif;font-size:7px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage-l);white-space:nowrap}
+.sec-hd::before,.sec-hd::after{content:'';flex:1;height:1px;background:var(--cream-dd)}
+
+/* CARDS */
+.list{padding:0 16px 140px}
+.card{background:var(--white);border-radius:8px;margin-bottom:9px;padding:15px 13px;display:flex;align-items:center;gap:11px;box-shadow:0 1px 5px rgba(86,102,75,.08);cursor:pointer;border-left:3px solid var(--cream-dd);transition:border-color .2s;-webkit-user-select:none;user-select:none}
+.card-num{width:22px;text-align:center;flex-shrink:0;font-family:'Cinzel',serif;font-size:10px;color:var(--sage-l);font-weight:600}
+.card-body{flex:1;min-width:0}
+.card-name{font-family:'Cinzel',serif;font-size:12.5px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.02em}
+.card-meta{display:flex;align-items:center;gap:7px;margin-top:5px;flex-wrap:wrap}
+.badge{font-family:'Cinzel',serif;font-size:7px;letter-spacing:.07em;text-transform:uppercase;padding:3px 9px;white-space:nowrap}
+.card-qty{font-size:11px;color:var(--sage-ll);font-style:italic}
+.card-note{font-size:12px;color:var(--sage-l);margin-top:3px;font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wa-mini{display:inline-flex;align-items:center;gap:4px;padding:7px 11px;background:var(--sage);color:var(--white);font-family:'Cinzel',serif;font-size:7px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;flex-shrink:0;border-radius:3px}
+.arr{color:var(--cream-dd);font-size:20px;flex-shrink:0;margin-left:2px}
+.empty-msg{text-align:center;padding:60px 20px;color:var(--sage-ll);font-style:italic;font-size:17px}
+.loading-msg{text-align:center;padding:50px 20px;color:var(--sage-l);font-family:'Cinzel',serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase}
+
+/* DRAWER */
+.overlay{position:fixed;inset:0;z-index:200;display:none}
+.overlay.open{display:block}
+.ov-bg{position:absolute;inset:0;background:rgba(26,38,22,.58)}
+.drawer{position:absolute;bottom:0;left:0;right:0;background:var(--cream);border-radius:20px 20px 0 0;padding-bottom:env(safe-area-inset-bottom,28px);box-shadow:0 -10px 50px rgba(26,38,22,.3);max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.drw-handle{display:flex;justify-content:center;padding:13px 0 0}
+.drw-handle b{width:36px;height:3px;background:var(--cream-dd);display:block;border-radius:99px}
+.drw-banner{background:linear-gradient(135deg,var(--sage-dd),var(--sage));margin:14px 16px 0;border-radius:8px;padding:16px;display:flex;justify-content:space-between;align-items:flex-start}
+.drw-orn{font-family:'Cinzel',serif;font-size:7px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-ll);opacity:.75}
+.drw-name{font-family:'Cinzel',serif;font-size:16px;font-weight:500;color:var(--white);margin-top:4px;letter-spacing:.03em;line-height:1.2}
+.drw-qty{font-size:12px;color:rgba(255,255,255,.5);margin-top:3px;font-style:italic}
+.drw-close{background:rgba(255,255,255,.14);border:none;border-radius:50%;width:32px;height:32px;font-size:18px;color:rgba(255,255,255,.8);cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.drw-inner{padding:16px 16px 4px}
+.drw-lbl{font-family:'Cinzel',serif;font-size:7px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage-l);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.drw-lbl::after{content:'';flex:1;height:1px;background:var(--cream-dd)}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
+.s-btn{padding:13px 8px;border-radius:6px;border:1px solid var(--border);background:var(--white);color:var(--muted);font-family:'Cinzel',serif;font-size:8px;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:7px;justify-content:center;transition:all .18s;white-space:nowrap}
+.s-btn .dot{width:8px;height:8px;border-radius:50%;background:var(--cream-dd);flex-shrink:0}
+.s-btn.on{font-weight:600}
+.wa-box{background:var(--sage-dd);border-radius:8px;padding:13px 15px;display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.wa-info{flex:1;min-width:0}
+.wa-lbl{font-family:'Cinzel',serif;font-size:7px;letter-spacing:.1em;color:var(--gold-ll);text-transform:uppercase}
+.wa-num{font-size:14px;color:rgba(255,255,255,.7);margin-top:2px;font-style:italic}
+.wa-open{display:flex;align-items:center;gap:5px;padding:9px 13px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);color:var(--white);font-family:'Cinzel',serif;font-size:7px;letter-spacing:.13em;text-transform:uppercase;text-decoration:none;flex-shrink:0;border-radius:3px}
+.note-ta{width:100%;border:1px solid var(--border);border-radius:6px;padding:12px 13px;font-size:15px;color:var(--ink);resize:none;outline:none;background:var(--white);margin-bottom:12px;font-style:italic;display:block;-webkit-appearance:none}
+.note-ta::placeholder{color:var(--sage-ll);font-style:italic}
+.note-ta:focus{border-color:var(--sage-l)}
+.save-btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--sage-dd),var(--sage));color:var(--white);border:none;border-radius:6px;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;box-shadow:0 4px 14px rgba(42,51,38,.26);margin-bottom:6px}
+
+/* TOAST */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(14px);background:var(--sage-dd);color:var(--gold-ll);padding:11px 24px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:.2em;text-transform:uppercase;opacity:0;transition:all .3s;z-index:300;white-space:nowrap;pointer-events:none;border:1px solid var(--sage-l);box-shadow:0 4px 18px rgba(26,38,22,.32)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- SYNC BAR -->
+<div class="sync-bar">
+  <div class="sync-dot loading" id="syncDot"></div>
+  <span class="sync-txt" id="syncTxt">Conectando…</span>
+</div>
+
+<!-- HEADER -->
+<div class="hdr">
+  <span class="hdr-pre">✦ Control de Asistencia ✦</span>
+  <div class="hdr-photo">💍</div>
+  <div class="hdr-title">López <span class="hdr-amp">&</span> Pinzón</div>
+  <div class="hdr-rule"><s></s><i>❧</i><s></s></div>
+  <span class="hdr-year">Lista de Invitados · 2026</span>
+  <a class="hdr-link" href="https://boda-lopez-pinzon.my.canva.site/copia-de-boda-lopez-pinzon" target="_blank">🔗 Ver invitación</a>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><span class="stat-n" id="sT" style="color:var(--gold-ll)">126</span><span class="stat-l">Personas</span></div>
+  <div class="stat"><span class="stat-n" id="sS" style="color:#a8d4b8">0</span><span class="stat-l">Contactados</span></div>
+  <div class="stat"><span class="stat-n" id="sC" style="color:#7fcca0">0</span><span class="stat-l">Confirmaron</span></div>
+  <div class="stat"><span class="stat-n" id="sP" style="color:#f0c878">0</span><span class="stat-l">Pendientes</span></div>
+</div>
+
+<!-- PROGRESS -->
+<div class="prog-box">
+  <div class="prog-row">
+    <span class="prog-lbl">Contactados</span>
+    <div class="prog-track"><div class="prog-fill" id="pbS" style="background:var(--sage-l);width:0%"></div></div>
+    <span class="prog-pct" id="ppS">0%</span>
+  </div>
+  <div class="prog-row">
+    <span class="prog-lbl">Confirmados</span>
+    <div class="prog-track"><div class="prog-fill" id="pbC" style="background:var(--sage);width:0%"></div></div>
+    <span class="prog-pct" id="ppC">0%</span>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab-btn on" id="tab-todos" onclick="setTab('todos')">Todos</button>
+  <button class="tab-btn" id="tab-novia" onclick="setTab('novia')">Lista Novia</button>
+  <button class="tab-btn" id="tab-novio" onclick="setTab('novio')">Lista Novio</button>
+</div>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <div class="search-wrap">
+    <span style="color:var(--sage-ll);font-size:14px;flex-shrink:0">✦</span>
+    <input type="text" id="qInput" placeholder="Buscar invitado…" oninput="onQ()" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+    <button class="clr" id="clrBtn" onclick="clrQ()">×</button>
+  </div>
+  <div class="filters" id="fBar"></div>
+</div>
+
+<div id="listWrap"><div class="loading-msg">✦ Cargando invitados ✦</div></div>
+
+<!-- DRAWER -->
+<div class="overlay" id="overlay">
+  <div class="ov-bg" onclick="closeD()"></div>
+  <div class="drawer">
+    <div class="drw-handle"><b></b></div>
+    <div class="drw-banner">
+      <div>
+        <div class="drw-orn" id="dLista">Lista</div>
+        <div class="drw-name" id="dName">—</div>
+        <div class="drw-qty" id="dQty"></div>
+      </div>
+      <button class="drw-close" onclick="closeD()">×</button>
+    </div>
+    <div class="drw-inner">
+      <div class="drw-lbl">Estado</div>
+      <div class="sgrid" id="sGrid"></div>
+      <div id="waWrap"></div>
+      <div class="drw-lbl">Notas</div>
+      <textarea class="note-ta" id="noteTA" rows="3" placeholder="Ej: confirmó el lunes, viene con bebé…"></textarea>
+      <button class="save-btn" onclick="saveD()">✦ Guardar ✦</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast">Guardado ✦</div>
+
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, doc, setDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAYrykxq_FIOL-3n0DI3tbYg7VLHCJxVf0",
+  authDomain: "boda-lopez-pinzon.firebaseapp.com",
+  projectId: "boda-lopez-pinzon",
+  storageBucket: "boda-lopez-pinzon.firebasestorage.app",
+  messagingSenderId: "601047020014",
+  appId: "1:601047020014:web:9247c1ffb31e716c7b5eff"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// ── GUEST DATA ──
+var N=[
+  {id:"n1",n:"ALMENDARES - RODRIGUEZ",q:3,p:"+50433232764"},
+  {id:"n2",n:"ALMENDARES - CANALES",q:3,p:"+50431465417"},
+  {id:"n3",n:"ALMENDARES - TORRES",q:2,p:"+50488483664"},
+  {id:"n4",n:"ANDRADRE - AVILEZ",q:3,p:"+50488300230"},
+  {id:"n5",n:"EMERSON CARIAS - FANNY GARCIA",q:2,p:"+50488057781"},
+  {id:"n6",n:"GARCIA - ESPINAL",q:2,p:"+50487349501"},
+  {id:"n7",n:"GODOY - ZAVALA",q:2,p:"+50488698341"},
+  {id:"n8",n:"JOSUE ALMENDARES & DANIEL CRUZ",q:2,p:"+50432687029"},
+  {id:"n9",n:"LUIS VALERIANO Y ESPOSA",q:2,p:"+50488325160"},
+  {id:"n10",n:"ORTEGA - GARCIA",q:4,p:"+50494352083"},
+  {id:"n11",n:"PEREZ - PINZÓN",q:2,p:"+50432808317"},
+  {id:"n12",n:"RAMIREZ - ALMENDARES",q:3,p:"+50489259901"},
+  {id:"n13",n:"ZELAYA - GODOY",q:2,p:"+50497082202"},
+  {id:"n14",n:"ALMEDARES PEREIRA",q:3,p:"+50488331138"},
+  {id:"n15",n:"CARMEN MEJÍA",q:1,p:"+50496667118"},
+  {id:"n16",n:"CLAUDINA RIERA",q:1,p:"+50489005005"},
+  {id:"n17",n:"CRISTIAN MEMBREÑO",q:1,p:"+50433869775"},
+  {id:"n18",n:"ENA MEMBREÑO",q:1,p:"+50431621958"},
+  {id:"n19",n:"ESWEN PINZÓN",q:1,p:"+50431562187"},
+  {id:"n20",n:"FELIX GARCIA",q:2,p:"+50492337717"},
+  {id:"n21",n:"GENESIS ESPAÑA",q:1,p:"+50431852770"},
+  {id:"n22",n:"JENNIFER CARIAS",q:2,p:"+50499971478"},
+  {id:"n23",n:"JUAN CARLOS AGUILAR",q:1,p:"+50495628996"},
+  {id:"n24",n:"KARLA ALMENDARES",q:2,p:"+34647190648"},
+  {id:"n25",n:"KEILA AVILA",q:1,p:"+50499933007"},
+  {id:"n26",n:"MERLIN MATAMOROS",q:1,p:"+19017451405"},
+  {id:"n27",n:"MOISES LAINEZ",q:1,p:"+50487304707"},
+  {id:"n28",n:"NINFA DISCUA",q:1,p:"+50496618406"},
+  {id:"n29",n:"RONALD REYES",q:1,p:"+50497450082"},
+  {id:"n30",n:"TANIA PADILLA",q:1,p:"+50494219125"},
+  {id:"n31",n:"TERESA SANCHEZ",q:1,p:"+50432288157"},
+  {id:"n32",n:"YESSENIA GARCIA",q:1,p:"+50488639750"},
+  {id:"n33",n:"YOLANDA PEREIRA",q:1,p:"+50498253421"}
+];
+var G=[
+  {id:"g1",n:"AMADOR-MÉNDEZ",q:3,p:"+50495469716"},
+  {id:"g2",n:"CABRERA-ARANA",q:2,p:"+50495247416"},
+  {id:"g3",n:"CHIKY Y GABY",q:2,p:"+50432603190"},
+  {id:"g4",n:"CARCAMO",q:2,p:"+50498566307"},
+  {id:"g5",n:"ESPINAL-OSORIO",q:2,p:"+50499314103"},
+  {id:"g6",n:"FLORES OYUELA",q:2,p:"+50432686026"},
+  {id:"g7",n:"IRAHETA-VÁZQUEZ",q:3,p:"+50497469411"},
+  {id:"g8",n:"LAGOS HERNÁNDEZ",q:2,p:"+50433903290"},
+  {id:"g9",n:"LÓPEZ-ALEMÁN",q:2,p:"+50497448283"},
+  {id:"g10",n:"LÓPEZ-ESPINAL",q:3,p:"+50492118163"},
+  {id:"g11",n:"LÓPEZ-LÓPEZ",q:2,p:""},
+  {id:"g12",n:"LÓPEZ-GIRÓN",q:3,p:"+50498584538"},
+  {id:"g13",n:"MATEO-LÓPEZ",q:2,p:"+50489973734"},
+  {id:"g14",n:"PEÑA SEGURA",q:2,p:"+50498884451"},
+  {id:"g15",n:"PINTO-BERTRAND",q:2,p:"+50498856856"},
+  {id:"g16",n:"RAMÍREZ-CABRERA",q:2,p:"+50496124530"},
+  {id:"g17",n:"RODRÍGUEZ BENITES",q:2,p:"+50488667732"},
+  {id:"g18",n:"SALINAS-ALEMÁN",q:5,p:"+50488206314"},
+  {id:"g19",n:"SÁNCHEZ-LÓPEZ",q:2,p:"+50431781929"},
+  {id:"g20",n:"ALEX CARBAJAL",q:2,p:"+50432581837"},
+  {id:"g21",n:"ALLAN ORELLANA",q:1,p:"+50432843383"},
+  {id:"g22",n:"ANALISIS ÁLVAREZ",q:1,p:"+50498846928"},
+  {id:"g23",n:"ANDRÉS RAUDALES",q:1,p:"+50498945653"},
+  {id:"g24",n:"CARLOS HERNÁNDEZ",q:1,p:"+50497230083"},
+  {id:"g25",n:"CARLOS VELÁSQUEZ",q:1,p:"+50496499653"},
+  {id:"g26",n:"CARMEN TOMÉ",q:1,p:"+50497136962"},
+  {id:"g27",n:"CRISTHIAN LÓPEZ",q:1,p:"+50431861687"},
+  {id:"g28",n:"DANIEL SALINAS",q:2,p:"+50488004343"},
+  {id:"g29",n:"DARLIN ESPINAL",q:1,p:"+50431545184"},
+  {id:"g30",n:"FERNANDO BUSTILLOS",q:1,p:"+50498938735"},
+  {id:"g31",n:"FREDDY JUÁREZ",q:1,p:"+50432775471"},
+  {id:"g32",n:"HÉCTOR MORENO",q:1,p:"+50494452652"},
+  {id:"g33",n:"JAVIER ESTRADA",q:1,p:"+50497559014"},
+  {id:"g34",n:"JOSECK RIVAS",q:1,p:"+18262701332"},
+  {id:"g35",n:"JOSUÉ NÚÑEZ",q:1,p:"+50497115366"},
+  {id:"g36",n:"JOSÉ ROMERO",q:1,p:"+50431953017"},
+  {id:"g37",n:"LILIAN MORADEL",q:1,p:"+50498068610"},
+  {id:"g38",n:"MARCELA RODRÍGUEZ",q:1,p:"+50431756210"},
+  {id:"g39",n:"RUT LÓPEZ",q:1,p:"+50431735010"},
+  {id:"g40",n:"SCARLETH CÁLIX",q:1,p:"+50433960869"},
+  {id:"g41",n:"YERAL GODÍNEZ",q:1,p:"+50498661079"}
+];
+var ALL=N.concat(G);
+
+var ST={
+  none:{l:"Sin contacto",c:"#6b7280",bg:"#f3f4f6",d:"#d1d5db"},
+  seen:{l:"Vio invitación",c:"#1d6e8f",bg:"#daf0fa",d:"#50b8d8"},
+  conf:{l:"Confirmó ✓",c:"#1d6b42",bg:"#d0f0e0",d:"#40c878"},
+  pend:{l:"Pendiente",c:"#965f10",bg:"#fdefd0",d:"#e8a830"},
+  no:  {l:"No asiste",c:"#882020",bg:"#fce8e8",d:"#e07070"}
+};
+var FK=["todos","none","seen","conf","pend","no"];
+var FL=["Todos","Sin contacto","Vieron","Confirmaron","Pendientes","No asisten"];
+var tab="todos", filt="todos", drwr=null;
+var S={};
+
+// ── SYNC STATUS ──
+function setSyncStatus(status){
+  var dot=document.getElementById("syncDot");
+  var txt=document.getElementById("syncTxt");
+  dot.className="sync-dot";
+  if(status==="on"){dot.classList.add("");txt.textContent="Sincronizado en tiempo real";}
+  else if(status==="off"){dot.classList.add("off");txt.textContent="Sin conexión";}
+  else{dot.classList.add("loading");txt.textContent="Conectando…";}
+}
+
+// ── FIRESTORE LISTENER — real-time sync ──
+const colRef = collection(db, "guests");
+onSnapshot(colRef, function(snapshot){
+  // Reset and rebuild from Firebase data
+  S = {};
+  snapshot.forEach(function(docSnap){
+    S[docSnap.id] = docSnap.data();
+  });
+  // Fill missing guests with defaults
+  ALL.forEach(function(g){ if(!S[g.id]) S[g.id]={s:"none",note:""}; });
+  setSyncStatus("on");
+  render();
+  updStats();
+}, function(err){
+  setSyncStatus("off");
+  // On error, still show guests with default state
+  ALL.forEach(function(g){ if(!S[g.id]) S[g.id]={s:"none",note:""}; });
+  render();
+  updStats();
+  console.error(err);
+});
+
+// ── SAVE TO FIRESTORE ──
+async function saveGuest(id){
+  try{
+    await setDoc(doc(db,"guests",id), S[id]);
+  }catch(e){ console.error(e); }
+}
+
+// ── STATS ──
+function updStats(){
+  var seen=0,conf=0,pend=0,n=ALL.length;
+  ALL.forEach(function(g){
+    var s=(S[g.id]||{}).s||"none";
+    if(s!=="none")seen++;
+    if(s==="conf")conf++;
+    if(s==="pend")pend++;
+  });
+  document.getElementById("sS").textContent=seen;
+  document.getElementById("sC").textContent=conf;
+  document.getElementById("sP").textContent=pend;
+  var sp=Math.round(seen/n*100),cp=Math.round(conf/n*100);
+  document.getElementById("pbS").style.width=sp+"%";
+  document.getElementById("pbC").style.width=cp+"%";
+  document.getElementById("ppS").textContent=sp+"%";
+  document.getElementById("ppC").textContent=cp+"%";
+}
+
+// ── TABS ──
+window.setTab=function(t){
+  tab=t;
+  ["todos","novia","novio"].forEach(function(k){
+    document.getElementById("tab-"+k).classList.toggle("on",k===t);
+  });
+  render();
+};
+
+// ── FILTERS ──
+function buildF(){
+  var h="";
+  FK.forEach(function(k,i){
+    h+='<button class="f-btn'+(filt===k?" on":"")+'" onclick="setF(\''+k+'\')">'+FL[i]+'</button>';
+  });
+  document.getElementById("fBar").innerHTML=h;
+}
+window.setF=function(k){ filt=k; buildF(); render(); };
+
+// ── RENDER ──
+function pool(){ return tab==="novia"?N:tab==="novio"?G:ALL; }
+
+function render(){
+  var q=document.getElementById("qInput").value.toLowerCase().trim();
+  var p=pool();
+  var vis=p.filter(function(g){
+    var mq=!q||g.n.toLowerCase().indexOf(q)>=0;
+    var mf=filt==="todos"||(S[g.id]||{s:"none"}).s===filt;
+    return mq&&mf;
+  });
+  var w=document.getElementById("listWrap");
+  if(!vis.length){w.innerHTML='<div class="empty-msg">No se encontraron invitados</div>';return;}
+  var h="";
+  if(tab==="todos"&&filt==="todos"&&!q){
+    var qN=N.reduce(function(a,g){return a+g.q;},0);
+    var qG=G.reduce(function(a,g){return a+g.q;},0);
+    h+='<div class="sec-hd"><span>Lista de la Novia · '+qN+' personas</span></div>';
+    h+='<div class="list">'+cards(N)+'</div>';
+    h+='<div class="sec-hd"><span>Lista del Novio · '+qG+' personas</span></div>';
+    h+='<div class="list">'+cards(G)+'</div>';
+  } else {
+    h='<div class="list">'+cards(vis)+'</div>';
+  }
+  w.innerHTML=h;
+}
+
+function gs(id){ return S[id]||{s:"none",note:""}; }
+
+function cards(arr){
+  return arr.map(function(g,i){
+    var d=gs(g.id), st=ST[d.s]||ST.none;
+    var wp=g.p&&g.p.length>3?"https://wa.me/"+g.p.replace(/\D/g,""):"";
+    return '<div class="card" style="border-left-color:'+st.d+'" onclick="openD(\''+g.id+'\')">'
+      +'<div class="card-num">'+(i+1)+'</div>'
+      +'<div class="card-body">'
+        +'<div class="card-name">'+g.n+'</div>'
+        +'<div class="card-meta">'
+          +'<span class="badge" style="background:'+st.bg+';color:'+st.c+'">'+st.l+'</span>'
+          +'<span class="card-qty">'+g.q+' '+(g.q===1?"persona":"personas")+'</span>'
+        +'</div>'
+        +(d.note?'<div class="card-note">📝 '+d.note+'</div>':"")
+      +'</div>'
+      +(wp?'<a class="wa-mini" href="'+wp+'" target="_blank" onclick="event.stopPropagation()">💬 WA</a>':"")
+      +'<div class="arr">›</div></div>';
+  }).join("");
+}
+
+window.onQ=function(){
+  var q=document.getElementById("qInput").value;
+  document.getElementById("clrBtn").style.display=q?"block":"none";
+  render();
+};
+window.clrQ=function(){
+  document.getElementById("qInput").value="";
+  document.getElementById("clrBtn").style.display="none";
+  render();
+};
+
+// ── DRAWER ──
+window.openD=function(id){
+  var g=ALL.filter(function(x){return x.id===id;})[0];
+  drwr=id;
+  var lista=N.some(function(x){return x.id===id;})?"Novia":"Novio";
+  document.getElementById("dLista").textContent="Lista "+lista;
+  document.getElementById("dName").textContent=g.n;
+  document.getElementById("dQty").textContent=g.q+" "+(g.q===1?"persona":"personas");
+  document.getElementById("noteTA").value=gs(id).note||"";
+  buildSG(id);
+  buildWA(g);
+  document.getElementById("overlay").classList.add("open");
+  document.body.style.overflow="hidden";
+};
+
+function buildSG(id){
+  var cur=gs(id).s, h="";
+  ["none","seen","conf","pend","no"].forEach(function(k){
+    var v=ST[k], on=cur===k;
+    h+='<button class="s-btn'+(on?" on":"")+'" onclick="setSt(\''+id+'\',\''+k+'\')"'
+      +(on?' style="border-color:'+v.d+';background:'+v.bg+';color:'+v.c+'"':"")+' >'
+      +'<span class="dot" style="background:'+(on?v.d:"var(--cream-dd)")+'"></span>'
+      +v.l+'</button>';
+  });
+  document.getElementById("sGrid").innerHTML=h;
+}
+
+function buildWA(g){
+  var w=document.getElementById("waWrap");
+  if(g.p&&g.p.length>3){
+    var url="https://wa.me/"+g.p.replace(/\D/g,"");
+    w.innerHTML='<div class="drw-lbl">WhatsApp</div>'
+      +'<div class="wa-box"><div class="wa-info">'
+      +'<div class="wa-lbl">'+g.n+'</div>'
+      +'<div class="wa-num">'+g.p+'</div></div>'
+      +'<a class="wa-open" href="'+url+'" target="_blank">💬 Abrir</a></div>';
+  } else { w.innerHTML=""; }
+}
+
+window.setSt=function(id,s){
+  if(!S[id]) S[id]={s:"none",note:""};
+  S[id].s=s;
+  saveGuest(id);
+  buildSG(id);
+  updStats();
+};
+
+window.closeD=function(){
+  if(drwr){
+    if(!S[drwr]) S[drwr]={s:"none",note:""};
+    S[drwr].note=document.getElementById("noteTA").value.trim();
+    saveGuest(drwr);
+  }
+  document.getElementById("overlay").classList.remove("open");
+  document.body.style.overflow="";
+  drwr=null;
+  render();
+};
+
+window.saveD=function(){
+  window.closeD();
+  var t=document.getElementById("toast");
+  t.classList.add("show");
+  setTimeout(function(){t.classList.remove("show");},2000);
+};
+
+// INIT - show 0s until Firebase loads, then update
+buildF();
+render();
+</script>
+</body>
+</html>
