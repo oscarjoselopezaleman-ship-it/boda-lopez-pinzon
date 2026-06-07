@@ -337,16 +337,22 @@ function setSyncStatus(status){
 // ── FIRESTORE LISTENER — real-time sync ──
 const colRef = collection(db, "guests");
 onSnapshot(colRef, function(snapshot){
+  // Reset and rebuild from Firebase data
+  S = {};
   snapshot.forEach(function(docSnap){
     S[docSnap.id] = docSnap.data();
   });
-  // fill missing
+  // Fill missing guests with defaults
   ALL.forEach(function(g){ if(!S[g.id]) S[g.id]={s:"none",note:""}; });
   setSyncStatus("on");
   render();
   updStats();
 }, function(err){
   setSyncStatus("off");
+  // On error, still show guests with default state
+  ALL.forEach(function(g){ if(!S[g.id]) S[g.id]={s:"none",note:""}; });
+  render();
+  updStats();
   console.error(err);
 });
 
@@ -520,8 +526,9 @@ window.saveD=function(){
   setTimeout(function(){t.classList.remove("show");},2000);
 };
 
-// INIT
+// INIT - show 0s until Firebase loads, then update
 buildF();
+render();
 </script>
 </body>
 </html>
