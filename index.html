@@ -1,6 +1,3 @@
-bash
-
-cat > /mnt/user-data/outputs/index.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -23,28 +20,36 @@ html,body{background:var(--cream);color:var(--ink);-webkit-text-size-adjust:100%
 body{font-family:'Cormorant Garamond',serif;font-weight:300;min-height:100vh}
 button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',serif;border-radius:0}
 
+/* SYNC INDICATOR */
+.sync-bar{background:var(--sage-dd);padding:6px 16px;display:flex;align-items:center;gap:8px;justify-content:center}
+.sync-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;flex-shrink:0}
+.sync-dot.off{background:#f87171}
+.sync-dot.loading{background:#fbbf24;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.sync-txt{font-family:'Cinzel',serif;font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+
 /* HEADER */
-.hdr{background:linear-gradient(165deg,var(--sage-dd) 0%,var(--sage-d) 50%,var(--sage) 100%);padding:54px 24px 30px;text-align:center;position:relative;overflow:hidden}
+.hdr{background:linear-gradient(165deg,var(--sage-dd) 0%,var(--sage-d) 50%,var(--sage) 100%);padding:44px 24px 28px;text-align:center;position:relative;overflow:hidden}
 .hdr::before{content:'';position:absolute;inset:0;opacity:.05;background-image:radial-gradient(circle,#fff 1px,transparent 1px);background-size:24px 24px;pointer-events:none}
 .hdr::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-l),transparent)}
-.hdr-pre{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.36em;color:var(--gold-ll);text-transform:uppercase;display:block;margin-bottom:16px;opacity:.8}
-.hdr-photo{width:108px;height:108px;border-radius:50%;border:2px solid var(--gold-l);margin:0 auto 16px;background:linear-gradient(135deg,var(--sage-l),var(--sage-d));display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 5px rgba(184,154,106,.15),0 8px 28px rgba(0,0,0,.32);font-size:42px}
-.hdr-title{font-family:'Cinzel Decorative',serif;font-size:clamp(20px,5.5vw,30px);font-weight:400;color:var(--white);letter-spacing:.05em;line-height:1.25;text-shadow:0 2px 18px rgba(0,0,0,.4)}
+.hdr-pre{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.36em;color:var(--gold-ll);text-transform:uppercase;display:block;margin-bottom:14px;opacity:.8}
+.hdr-photo{width:104px;height:104px;border-radius:50%;border:2px solid var(--gold-l);margin:0 auto 14px;background:linear-gradient(135deg,var(--sage-l),var(--sage-d));display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 5px rgba(184,154,106,.15),0 8px 28px rgba(0,0,0,.32);font-size:40px}
+.hdr-title{font-family:'Cinzel Decorative',serif;font-size:clamp(19px,5vw,28px);font-weight:400;color:var(--white);letter-spacing:.05em;line-height:1.25;text-shadow:0 2px 18px rgba(0,0,0,.4)}
 .hdr-amp{color:var(--gold-ll);font-style:italic}
-.hdr-rule{display:flex;align-items:center;gap:10px;margin:14px auto;max-width:180px}
+.hdr-rule{display:flex;align-items:center;gap:10px;margin:12px auto;max-width:170px}
 .hdr-rule i{color:var(--gold-ll);font-size:15px;font-style:normal}
 .hdr-rule s{flex:1;height:1px;text-decoration:none}
 .hdr-rule s:first-child{background:linear-gradient(90deg,transparent,var(--gold-l))}
 .hdr-rule s:last-child{background:linear-gradient(90deg,var(--gold-l),transparent)}
-.hdr-year{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.28em;color:rgba(255,255,255,.45);display:block;margin-bottom:18px}
+.hdr-year{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.28em;color:rgba(255,255,255,.45);display:block;margin-bottom:16px}
 .hdr-link{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border:1px solid rgba(196,170,122,.45);color:var(--gold-ll);font-family:'Cinzel',serif;font-size:8px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;background:rgba(154,132,86,.16)}
 
 /* STATS */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);background:var(--sage-dd)}
-.stat{text-align:center;padding:15px 4px;border-right:1px solid rgba(255,255,255,.07)}
+.stat{text-align:center;padding:14px 4px;border-right:1px solid rgba(255,255,255,.07)}
 .stat:last-child{border-right:none}
-.stat-n{display:block;font-family:'Cinzel',serif;font-size:25px;font-weight:600;line-height:1}
-.stat-l{display:block;font-family:'Cinzel',serif;font-size:6px;letter-spacing:.14em;text-transform:uppercase;margin-top:4px;opacity:.45;color:#fff}
+.stat-n{display:block;font-family:'Cinzel',serif;font-size:24px;font-weight:600;line-height:1}
+.stat-l{display:block;font-family:'Cinzel',serif;font-size:6px;letter-spacing:.13em;text-transform:uppercase;margin-top:4px;opacity:.45;color:#fff}
 
 /* PROGRESS */
 .prog-box{background:var(--white);border-bottom:1px solid var(--border)}
@@ -57,7 +62,7 @@ button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',s
 
 /* TABS */
 .tabs{background:var(--white);border-bottom:2px solid var(--cream-dd);display:flex}
-.tab-btn{flex:1;padding:13px 6px;font-family:'Cinzel',serif;font-size:7.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap}
+.tab-btn{flex:1;padding:13px 6px;font-family:'Cinzel',serif;font-size:7.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap}
 .tab-btn.on{color:var(--sage-d);border-bottom-color:var(--sage)}
 
 /* CONTROLS */
@@ -68,7 +73,7 @@ button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',s
 .clr{background:none;border:none;color:var(--sage-ll);font-size:22px;cursor:pointer;padding:0;line-height:1;display:none;flex-shrink:0}
 .filters{display:flex;gap:6px;padding:10px 0 14px;overflow-x:auto;-webkit-overflow-scrolling:touch}
 .filters::-webkit-scrollbar{display:none}
-.f-btn{flex-shrink:0;padding:7px 14px;border:1px solid var(--border);background:var(--white);color:var(--muted);font-family:'Cinzel',serif;font-size:7px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.f-btn{flex-shrink:0;padding:7px 14px;border:1px solid var(--border);background:var(--white);color:var(--muted);font-family:'Cinzel',serif;font-size:7px;letter-spacing:.13em;text-transform:uppercase;cursor:pointer;transition:all .2s}
 .f-btn.on{background:var(--sage);border-color:var(--sage);color:var(--white)}
 
 /* SECTION HEADING */
@@ -89,9 +94,10 @@ button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',s
 .wa-mini{display:inline-flex;align-items:center;gap:4px;padding:7px 11px;background:var(--sage);color:var(--white);font-family:'Cinzel',serif;font-size:7px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;flex-shrink:0;border-radius:3px}
 .arr{color:var(--cream-dd);font-size:20px;flex-shrink:0;margin-left:2px}
 .empty-msg{text-align:center;padding:60px 20px;color:var(--sage-ll);font-style:italic;font-size:17px}
+.loading-msg{text-align:center;padding:50px 20px;color:var(--sage-l);font-family:'Cinzel',serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase}
 
 /* DRAWER */
-.overlay{position:fixed;inset:0;z-index:200;display:none;-webkit-overflow-scrolling:touch}
+.overlay{position:fixed;inset:0;z-index:200;display:none}
 .overlay.open{display:block}
 .ov-bg{position:absolute;inset:0;background:rgba(26,38,22,.58)}
 .drawer{position:absolute;bottom:0;left:0;right:0;background:var(--cream);border-radius:20px 20px 0 0;padding-bottom:env(safe-area-inset-bottom,28px);box-shadow:0 -10px 50px rgba(26,38,22,.3);max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
@@ -126,6 +132,13 @@ button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',s
 </head>
 <body>
 
+<!-- SYNC BAR -->
+<div class="sync-bar">
+  <div class="sync-dot loading" id="syncDot"></div>
+  <span class="sync-txt" id="syncTxt">Conectando…</span>
+</div>
+
+<!-- HEADER -->
 <div class="hdr">
   <span class="hdr-pre">✦ Control de Asistencia ✦</span>
   <div class="hdr-photo">💍</div>
@@ -135,6 +148,7 @@ button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',s
   <a class="hdr-link" href="https://boda-lopez-pinzon.my.canva.site/copia-de-boda-lopez-pinzon" target="_blank">🔗 Ver invitación</a>
 </div>
 
+<!-- STATS -->
 <div class="stats">
   <div class="stat"><span class="stat-n" id="sT" style="color:var(--gold-ll)">126</span><span class="stat-l">Personas</span></div>
   <div class="stat"><span class="stat-n" id="sS" style="color:#a8d4b8">0</span><span class="stat-l">Contactados</span></div>
@@ -142,6 +156,7 @@ button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',s
   <div class="stat"><span class="stat-n" id="sP" style="color:#f0c878">0</span><span class="stat-l">Pendientes</span></div>
 </div>
 
+<!-- PROGRESS -->
 <div class="prog-box">
   <div class="prog-row">
     <span class="prog-lbl">Contactados</span>
@@ -155,12 +170,14 @@ button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',s
   </div>
 </div>
 
+<!-- TABS -->
 <div class="tabs">
   <button class="tab-btn on" id="tab-todos" onclick="setTab('todos')">Todos</button>
   <button class="tab-btn" id="tab-novia" onclick="setTab('novia')">Lista Novia</button>
   <button class="tab-btn" id="tab-novio" onclick="setTab('novio')">Lista Novio</button>
 </div>
 
+<!-- CONTROLS -->
 <div class="controls">
   <div class="search-wrap">
     <span style="color:var(--sage-ll);font-size:14px;flex-shrink:0">✦</span>
@@ -170,7 +187,7 @@ button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',s
   <div class="filters" id="fBar"></div>
 </div>
 
-<div id="listWrap"></div>
+<div id="listWrap"><div class="loading-msg">✦ Cargando invitados ✦</div></div>
 
 <!-- DRAWER -->
 <div class="overlay" id="overlay">
@@ -197,7 +214,24 @@ button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',s
 </div>
 <div class="toast" id="toast">Guardado ✦</div>
 
-<script>
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, doc, setDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAYrykxq_FIOL-3n0DI3tbYg7VLHCJxVf0",
+  authDomain: "boda-lopez-pinzon.firebaseapp.com",
+  projectId: "boda-lopez-pinzon",
+  storageBucket: "boda-lopez-pinzon.firebasestorage.app",
+  messagingSenderId: "601047020014",
+  appId: "1:601047020014:web:9247c1ffb31e716c7b5eff"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// ── GUEST DATA ──
 var N=[
   {id:"n1",n:"ALMENDARES - RODRIGUEZ",q:3,p:"+50433232764"},
   {id:"n2",n:"ALMENDARES - CANALES",q:3,p:"+50431465417"},
@@ -277,6 +311,7 @@ var G=[
   {id:"g41",n:"YERAL GODÍNEZ",q:1,p:"+50498661079"}
 ];
 var ALL=N.concat(G);
+
 var ST={
   none:{l:"Sin contacto",c:"#6b7280",bg:"#f3f4f6",d:"#d1d5db"},
   seen:{l:"Vio invitación",c:"#1d6e8f",bg:"#daf0fa",d:"#50b8d8"},
@@ -286,24 +321,47 @@ var ST={
 };
 var FK=["todos","none","seen","conf","pend","no"];
 var FL=["Todos","Sin contacto","Vieron","Confirmaron","Pendientes","No asisten"];
-var tab="todos",filt="todos",drwr=null;
+var tab="todos", filt="todos", drwr=null;
 var S={};
 
-function loadS(){
-  var j=null;
-  try{j=localStorage.getItem("blp26");}catch(e){}
-  if(j){try{S=JSON.parse(j);}catch(e){S={};}}
-  ALL.forEach(function(g){if(!S[g.id])S[g.id]={s:"none",note:""};});
+// ── SYNC STATUS ──
+function setSyncStatus(status){
+  var dot=document.getElementById("syncDot");
+  var txt=document.getElementById("syncTxt");
+  dot.className="sync-dot";
+  if(status==="on"){dot.classList.add("");txt.textContent="Sincronizado en tiempo real";}
+  else if(status==="off"){dot.classList.add("off");txt.textContent="Sin conexión";}
+  else{dot.classList.add("loading");txt.textContent="Conectando…";}
 }
-function saveS(){
-  try{localStorage.setItem("blp26",JSON.stringify(S));}catch(e){}
-}
-function gs(id){return S[id]||{s:"none",note:""};}
 
+// ── FIRESTORE LISTENER — real-time sync ──
+const colRef = collection(db, "guests");
+onSnapshot(colRef, function(snapshot){
+  snapshot.forEach(function(docSnap){
+    S[docSnap.id] = docSnap.data();
+  });
+  // fill missing
+  ALL.forEach(function(g){ if(!S[g.id]) S[g.id]={s:"none",note:""}; });
+  setSyncStatus("on");
+  render();
+  updStats();
+}, function(err){
+  setSyncStatus("off");
+  console.error(err);
+});
+
+// ── SAVE TO FIRESTORE ──
+async function saveGuest(id){
+  try{
+    await setDoc(doc(db,"guests",id), S[id]);
+  }catch(e){ console.error(e); }
+}
+
+// ── STATS ──
 function updStats(){
   var seen=0,conf=0,pend=0,n=ALL.length;
   ALL.forEach(function(g){
-    var s=gs(g.id).s;
+    var s=(S[g.id]||{}).s||"none";
     if(s!=="none")seen++;
     if(s==="conf")conf++;
     if(s==="pend")pend++;
@@ -318,14 +376,16 @@ function updStats(){
   document.getElementById("ppC").textContent=cp+"%";
 }
 
-function setTab(t){
+// ── TABS ──
+window.setTab=function(t){
   tab=t;
   ["todos","novia","novio"].forEach(function(k){
     document.getElementById("tab-"+k).classList.toggle("on",k===t);
   });
   render();
-}
+};
 
+// ── FILTERS ──
 function buildF(){
   var h="";
   FK.forEach(function(k,i){
@@ -333,16 +393,17 @@ function buildF(){
   });
   document.getElementById("fBar").innerHTML=h;
 }
-function setF(k){filt=k;buildF();render();}
+window.setF=function(k){ filt=k; buildF(); render(); };
 
-function pool(){return tab==="novia"?N:tab==="novio"?G:ALL;}
+// ── RENDER ──
+function pool(){ return tab==="novia"?N:tab==="novio"?G:ALL; }
 
 function render(){
   var q=document.getElementById("qInput").value.toLowerCase().trim();
   var p=pool();
   var vis=p.filter(function(g){
     var mq=!q||g.n.toLowerCase().indexOf(q)>=0;
-    var mf=filt==="todos"||gs(g.id).s===filt;
+    var mf=filt==="todos"||(S[g.id]||{s:"none"}).s===filt;
     return mq&&mf;
   });
   var w=document.getElementById("listWrap");
@@ -361,9 +422,11 @@ function render(){
   w.innerHTML=h;
 }
 
+function gs(id){ return S[id]||{s:"none",note:""}; }
+
 function cards(arr){
   return arr.map(function(g,i){
-    var d=gs(g.id),st=ST[d.s]||ST.none;
+    var d=gs(g.id), st=ST[d.s]||ST.none;
     var wp=g.p&&g.p.length>3?"https://wa.me/"+g.p.replace(/\D/g,""):"";
     return '<div class="card" style="border-left-color:'+st.d+'" onclick="openD(\''+g.id+'\')">'
       +'<div class="card-num">'+(i+1)+'</div>'
@@ -380,18 +443,19 @@ function cards(arr){
   }).join("");
 }
 
-function onQ(){
+window.onQ=function(){
   var q=document.getElementById("qInput").value;
   document.getElementById("clrBtn").style.display=q?"block":"none";
   render();
-}
-function clrQ(){
+};
+window.clrQ=function(){
   document.getElementById("qInput").value="";
   document.getElementById("clrBtn").style.display="none";
   render();
-}
+};
 
-function openD(id){
+// ── DRAWER ──
+window.openD=function(id){
   var g=ALL.filter(function(x){return x.id===id;})[0];
   drwr=id;
   var lista=N.some(function(x){return x.id===id;})?"Novia":"Novio";
@@ -403,12 +467,12 @@ function openD(id){
   buildWA(g);
   document.getElementById("overlay").classList.add("open");
   document.body.style.overflow="hidden";
-}
+};
 
 function buildSG(id){
-  var cur=gs(id).s,h="";
+  var cur=gs(id).s, h="";
   ["none","seen","conf","pend","no"].forEach(function(k){
-    var v=ST[k],on=cur===k;
+    var v=ST[k], on=cur===k;
     h+='<button class="s-btn'+(on?" on":"")+'" onclick="setSt(\''+id+'\',\''+k+'\')"'
       +(on?' style="border-color:'+v.d+';background:'+v.bg+';color:'+v.c+'"':"")+' >'
       +'<span class="dot" style="background:'+(on?v.d:"var(--cream-dd)")+'"></span>'
@@ -422,48 +486,42 @@ function buildWA(g){
   if(g.p&&g.p.length>3){
     var url="https://wa.me/"+g.p.replace(/\D/g,"");
     w.innerHTML='<div class="drw-lbl">WhatsApp</div>'
-      +'<div class="wa-box"><div class="wa-info"><div class="wa-lbl">'+g.n+'</div>'
+      +'<div class="wa-box"><div class="wa-info">'
+      +'<div class="wa-lbl">'+g.n+'</div>'
       +'<div class="wa-num">'+g.p+'</div></div>'
       +'<a class="wa-open" href="'+url+'" target="_blank">💬 Abrir</a></div>';
   } else { w.innerHTML=""; }
 }
 
-function setSt(id,s){
-  S[id]=Object.assign({},gs(id),{s:s});
-  saveS();buildSG(id);updStats();
-}
+window.setSt=function(id,s){
+  if(!S[id]) S[id]={s:"none",note:""};
+  S[id].s=s;
+  saveGuest(id);
+  buildSG(id);
+  updStats();
+};
 
-function closeD(){
+window.closeD=function(){
   if(drwr){
-    S[drwr]=Object.assign({},gs(drwr),{note:document.getElementById("noteTA").value.trim()});
-    saveS();
+    if(!S[drwr]) S[drwr]={s:"none",note:""};
+    S[drwr].note=document.getElementById("noteTA").value.trim();
+    saveGuest(drwr);
   }
   document.getElementById("overlay").classList.remove("open");
   document.body.style.overflow="";
-  drwr=null;render();
-}
+  drwr=null;
+  render();
+};
 
-function saveD(){
-  closeD();
+window.saveD=function(){
+  window.closeD();
   var t=document.getElementById("toast");
   t.classList.add("show");
   setTimeout(function(){t.classList.remove("show");},2000);
-}
+};
 
 // INIT
-loadS();buildF();render();updStats();
+buildF();
 </script>
 </body>
 </html>
-HTMLEOF
-echo "done"
-Salida
-
-done
-Listo
-
-
-
-
-
-
