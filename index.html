@@ -217,7 +217,7 @@ button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',s
 <!-- FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, doc, setDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, doc, setDoc, getDoc, getDocs, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAYrykxq_FIOL-3n0DI3tbYg7VLHCJxVf0",
@@ -334,25 +334,34 @@ function setSyncStatus(status){
   else{dot.classList.add("loading");txt.textContent="Conectando…";}
 }
 
-// ── FIRESTORE LISTENER — real-time sync ──
+// ── FIRESTORE ──
 const colRef = collection(db, "guests");
-onSnapshot(colRef, function(snapshot){
-  // Reset and rebuild from Firebase data
+
+// First load with getDocs (more reliable on first open)
+getDocs(colRef).then(function(snapshot){
   S = {};
-  snapshot.forEach(function(docSnap){
-    S[docSnap.id] = docSnap.data();
-  });
-  // Fill missing guests with defaults
+  snapshot.forEach(function(docSnap){ S[docSnap.id] = docSnap.data(); });
+  ALL.forEach(function(g){ if(!S[g.id]) S[g.id]={s:"none",note:""}; });
+  setSyncStatus("on");
+  render();
+  updStats();
+}).catch(function(err){
+  setSyncStatus("off");
+  ALL.forEach(function(g){ if(!S[g.id]) S[g.id]={s:"none",note:""}; });
+  render();
+  updStats();
+});
+
+// Then keep listening for real-time changes
+onSnapshot(colRef, function(snapshot){
+  S = {};
+  snapshot.forEach(function(docSnap){ S[docSnap.id] = docSnap.data(); });
   ALL.forEach(function(g){ if(!S[g.id]) S[g.id]={s:"none",note:""}; });
   setSyncStatus("on");
   render();
   updStats();
 }, function(err){
   setSyncStatus("off");
-  // On error, still show guests with default state
-  ALL.forEach(function(g){ if(!S[g.id]) S[g.id]={s:"none",note:""}; });
-  render();
-  updStats();
   console.error(err);
 });
 
