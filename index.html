@@ -217,7 +217,8 @@ button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',s
 <!-- FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, doc, setDoc, getDoc, getDocs, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, doc, setDoc, getDocs, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAYrykxq_FIOL-3n0DI3tbYg7VLHCJxVf0",
@@ -230,8 +231,18 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
 
-// ── GUEST DATA ──
+// Sign in anonymously first, then connect to Firestore
+signInAnonymously(auth).then(function(){
+  startFirestore();
+}).catch(function(err){
+  console.error("Auth error:", err);
+  // Try connecting anyway
+  startFirestore();
+});
+
+function startFirestore(){
 var N=[
   {id:"n1",n:"ALMENDARES - RODRIGUEZ",q:3,p:"+50433232764"},
   {id:"n2",n:"ALMENDARES - CANALES",q:3,p:"+50431465417"},
@@ -538,6 +549,7 @@ window.saveD=function(){
 // INIT - show 0s until Firebase loads, then update
 buildF();
 render();
+} // end startFirestore
 </script>
 </body>
 </html>
