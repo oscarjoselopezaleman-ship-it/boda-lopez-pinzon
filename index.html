@@ -1,3 +1,6 @@
+bash
+
+cat > /mnt/user-data/outputs/index.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,20 +12,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cinzel+Decorative:wght@400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-:root{
-  --sage:#56664b;--sage-l:#7a8f6e;--sage-ll:#a8bba0;
-  --sage-d:#3a4733;--sage-dd:#2a3326;
-  --cream:#f8faf5;--cream-d:#eef2ea;--cream-dd:#dde6d8;
-  --gold:#9a8456;--gold-l:#c4aa7a;--gold-ll:#e8d9bc;
-  --white:#fff;--ink:#1e2a1a;--muted:#5a6e54;--border:#cfd9c8;
-}
+:root{--sage:#56664b;--sage-l:#7a8f6e;--sage-ll:#a8bba0;--sage-d:#3a4733;--sage-dd:#2a3326;--cream:#f8faf5;--cream-d:#eef2ea;--cream-dd:#dde6d8;--gold:#9a8456;--gold-l:#c4aa7a;--gold-ll:#e8d9bc;--white:#fff;--ink:#1e2a1a;--muted:#5a6e54;--border:#cfd9c8}
 html,body{background:var(--cream);color:var(--ink);-webkit-text-size-adjust:100%;overflow-x:hidden}
 body{font-family:'Cormorant Garamond',serif;font-weight:300;min-height:100vh}
 button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',serif;border-radius:0}
 .sync-bar{background:var(--sage-dd);padding:6px 16px;display:flex;align-items:center;gap:8px;justify-content:center}
 .sync-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;flex-shrink:0}
-.sync-dot.off{background:#f87171}
-.sync-dot.loading{background:#fbbf24;animation:pulse 1s infinite}
+.sync-dot.off{background:#f87171}.sync-dot.loading{background:#fbbf24;animation:pulse 1s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .sync-txt{font-family:'Cinzel',serif;font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.6)}
 .hdr{background:linear-gradient(165deg,var(--sage-dd) 0%,var(--sage-d) 50%,var(--sage) 100%);padding:44px 24px 28px;text-align:center;position:relative;overflow:hidden}
@@ -111,12 +107,10 @@ button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',s
 </style>
 </head>
 <body>
-
 <div class="sync-bar">
   <div class="sync-dot loading" id="syncDot"></div>
   <span class="sync-txt" id="syncTxt">Conectando…</span>
 </div>
-
 <div class="hdr">
   <span class="hdr-pre">✦ Control de Asistencia ✦</span>
   <div class="hdr-photo">💍</div>
@@ -125,33 +119,21 @@ button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',s
   <span class="hdr-year">Lista de Invitados · 2026</span>
   <a class="hdr-link" href="https://boda-lopez-pinzon.my.canva.site/copia-de-boda-lopez-pinzon" target="_blank">🔗 Ver invitación</a>
 </div>
-
 <div class="stats">
   <div class="stat"><span class="stat-n" id="sT" style="color:var(--gold-ll)">128</span><span class="stat-l">Personas</span></div>
   <div class="stat"><span class="stat-n" id="sS" style="color:#a8d4b8">0</span><span class="stat-l">Contactados</span></div>
   <div class="stat"><span class="stat-n" id="sC" style="color:#7fcca0">0</span><span class="stat-l">Confirmaron</span></div>
   <div class="stat"><span class="stat-n" id="sP" style="color:#f0c878">0</span><span class="stat-l">Pendientes</span></div>
 </div>
-
 <div class="prog-box">
-  <div class="prog-row">
-    <span class="prog-lbl">Contactados</span>
-    <div class="prog-track"><div class="prog-fill" id="pbS" style="background:var(--sage-l);width:0%"></div></div>
-    <span class="prog-pct" id="ppS">0%</span>
-  </div>
-  <div class="prog-row">
-    <span class="prog-lbl">Confirmados</span>
-    <div class="prog-track"><div class="prog-fill" id="pbC" style="background:var(--sage);width:0%"></div></div>
-    <span class="prog-pct" id="ppC">0%</span>
-  </div>
+  <div class="prog-row"><span class="prog-lbl">Contactados</span><div class="prog-track"><div class="prog-fill" id="pbS" style="background:var(--sage-l);width:0%"></div></div><span class="prog-pct" id="ppS">0%</span></div>
+  <div class="prog-row"><span class="prog-lbl">Confirmados</span><div class="prog-track"><div class="prog-fill" id="pbC" style="background:var(--sage);width:0%"></div></div><span class="prog-pct" id="ppC">0%</span></div>
 </div>
-
 <div class="tabs">
   <button class="tab-btn on" id="tab-todos" onclick="setTab('todos')">Todos</button>
   <button class="tab-btn" id="tab-novia" onclick="setTab('novia')">Lista Novia</button>
   <button class="tab-btn" id="tab-novio" onclick="setTab('novio')">Lista Novio</button>
 </div>
-
 <div class="controls">
   <div class="search-wrap">
     <span style="color:var(--sage-ll);font-size:14px;flex-shrink:0">✦</span>
@@ -160,9 +142,7 @@ button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',s
   </div>
   <div class="filters" id="fBar"></div>
 </div>
-
 <div id="listWrap"><div class="loading-msg">✦ Cargando invitados ✦</div></div>
-
 <div class="overlay" id="overlay">
   <div class="ov-bg" onclick="closeD()"></div>
   <div class="drawer">
@@ -202,118 +182,122 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+const db  = getFirestore(app);
 const auth = getAuth(app);
 
-// ── LISTA NOVIA — Familias primero (mayor cantidad primero), luego mujeres, luego hombres ──
-var N=[
-  // FAMILIAS (ordenadas de mayor a menor cantidad)
-  {id:"n10",n:"ORTEGA - GARCIA",q:4,p:"+50494352083"},
-  {id:"n1",n:"ALMENDARES - RODRIGUEZ",q:3,p:"+50433232764"},
-  {id:"n2",n:"ALMENDARES - CANALES",q:3,p:"+50431465417"},
-  {id:"n6",n:"ALMEDARES PEREIRA",q:3,p:"+50488331138"},
-  {id:"n12",n:"RAMIREZ - ALMENDARES",q:3,p:"+50489259901"},
-  {id:"n21",n:"ANDRADRE - AVILEZ",q:3,p:"+50488300230"},
-  {id:"n5",n:"EMERSON CARIAS - FANNY GARCIA",q:2,p:"+50488057781"},
-  {id:"n7",n:"GODOY - ZAVALA",q:2,p:"+50488698341"},
-  {id:"n8",n:"JOSUE ALMENDARES & DANIEL CRUZ",q:2,p:"+50432687029"},
-  {id:"n3",n:"ALMENDARES - TORRES",q:2,p:"+50488483664"},
-  {id:"n24",n:"KARLA ALMENDARES",q:2,p:"+34647190648"},
-  {id:"n13",n:"ACOSTA - DURON",q:2,p:"+50431728529"},
-  {id:"n14",n:"PEREZ - PINZÓN",q:2,p:"+50432808317"},
-  {id:"n22",n:"JENNIFER CARIAS",q:2,p:"+50499971478"},
-  {id:"n4",n:"ANDRADRE - AVILEZ",q:2,p:"+50488300230"},
-  {id:"n20",n:"FELIX GARCIA",q:2,p:"+50492337717"},
-  {id:"n34",n:"LUIS VALERIANO Y ESPOSA",q:2,p:"+50488325160"},
-  {id:"n23",n:"ZELAYA - GODOY",q:2,p:"+50497082202"},
-  {id:"n24b",n:"GARCIA - ESPINAL",q:2,p:"+50487349501"},
+// ════════════════════════════════
+// LISTA NOVIA — 34 entradas, 59 personas
+// Orden: Familias (mayor→menor), Mujeres, Hombres
+// ════════════════════════════════
+var N = [
+  // FAMILIAS
+  {id:"n01",n:"ORTEGA - GARCIA",                q:4,p:"+50494352083"},
+  {id:"n02",n:"ALMEDARES - PEREIRA",             q:3,p:"+50488331138"},
+  {id:"n03",n:"ALMENDARES - CANALES",            q:3,p:"+50431465417"},
+  {id:"n04",n:"ALMEDARES - RODRIGUEZ",           q:3,p:"+50433232764"},
+  {id:"n05",n:"RAMIREZ - ALMENDARES",            q:3,p:"+50489259901"},
+  {id:"n06",n:"ANDRADRE - AVILEZ",               q:3,p:"+50488300230"},
+  {id:"n07",n:"EMERSON CARIAS - FANNY GARCIA",   q:2,p:"+50488057781"},
+  {id:"n08",n:"FELIX - GARCIA",                  q:2,p:"+50492337717"},
+  {id:"n09",n:"JOSUE ALMENDARES & DANIEL CRUZ",  q:2,p:"+50432687029"},
+  {id:"n10",n:"ALMENDARES - TORRES",             q:2,p:"+50488483664"},
+  {id:"n11",n:"KARLA ALMENDARES",                q:2,p:"+34647190648"},
+  {id:"n12",n:"ACOSTA - DURON",                  q:2,p:"+50431728529"},
+  {id:"n13",n:"PEREZ - PINZÓN",                  q:2,p:"+50432808317"},
+  {id:"n14",n:"GODOY - ZAVALA",                  q:2,p:"+50488698341"},
+  {id:"n15",n:"ZELAYA - GODOY",                  q:2,p:"+50497082202"},
+  {id:"n16",n:"GARCIA - ESPINAL",                q:2,p:"+50487349501"},
+  {id:"n17",n:"JENNIFER CARIAS",                 q:2,p:"+50499971478"},
+  {id:"n18",n:"LUIS VALERIANO Y ESPOSA",         q:2,p:"+50488325160"},
   // MUJERES
-  {id:"n15",n:"CARMEN MEJÍA",q:1,p:"+50496667118"},
-  {id:"n18",n:"ENA MEMBREÑO",q:1,p:"+50431621958"},
-  {id:"n21b",n:"GENESIS ESPAÑA",q:1,p:"+50431852770"},
-  {id:"n25",n:"KEILA AVILA",q:1,p:"+50499933007"},
-  {id:"n26",n:"MERLIN MATAMOROS",q:1,p:"+19017451405"},
-  {id:"n28",n:"NINFA DISCUA",q:1,p:"+50496618406"},
-  {id:"n31",n:"CLAUDINA RIERA",q:1,p:"+50489005005"},
-  {id:"n32",n:"YESSENIA GARCIA",q:1,p:"+50488639750"},
-  {id:"n33",n:"TERESA SANCHEZ",q:1,p:"+50432288157"},
-  {id:"n5b",n:"YOLANDA PEREIRA",q:1,p:"+50498253421"},
-  {id:"n30",n:"TANIA PADILLA",q:1,p:"+50494219125"},
+  {id:"n19",n:"CARMEN MEJÍA",                    q:1,p:"+50496667118"},
+  {id:"n20",n:"ENA MEMBREÑO",                    q:1,p:"+50431621958"},
+  {id:"n21",n:"GENESIS ESPAÑA",                  q:1,p:"+50431852770"},
+  {id:"n22",n:"KEILA AVILA",                     q:1,p:"+50499933007"},
+  {id:"n23",n:"MERLIN MATAMOROS",                q:1,p:"+19017451405"},
+  {id:"n24",n:"NINFA DISCUA",                    q:1,p:"+50496618406"},
+  {id:"n25",n:"CLAUDINA RIERA",                  q:1,p:"+50489005005"},
+  {id:"n26",n:"YESSENIA GARCIA",                 q:1,p:"+50488639750"},
+  {id:"n27",n:"TERESA SANCHEZ",                  q:1,p:"+50432288157"},
+  {id:"n28",n:"YOLANDA PEREIRA",                 q:1,p:"+50498253421"},
+  {id:"n29",n:"TANIA PADILLA",                   q:1,p:"+50494219125"},
   // HOMBRES
-  {id:"n16",n:"MOISES LAINEZ",q:1,p:"+50487304707"},
-  {id:"n17",n:"CRISTIAN MEMBREÑO",q:1,p:"+50433869775"},
-  {id:"n19",n:"ESWEN PINZÓN",q:1,p:"+50431562187"},
-  {id:"n23b",n:"JUAN CARLOS AGUILAR",q:1,p:"+50495628996"},
-  {id:"n29",n:"RONALD REYES",q:1,p:"+50497450082"},
+  {id:"n30",n:"MOISES LAINEZ",                   q:1,p:"+50487304707"},
+  {id:"n31",n:"CRISTIAN MEMBREÑO",               q:1,p:"+50433869775"},
+  {id:"n32",n:"ESWEN PINZÓN",                    q:1,p:"+50431562187"},
+  {id:"n33",n:"JUAN CARLOS AGUILAR",             q:1,p:"+50495628996"},
+  {id:"n34",n:"RONALD REYES",                    q:1,p:"+50497450082"},
 ];
 
-// ── LISTA NOVIO — Familias primero (mayor cantidad primero), luego mujeres, luego hombres ──
-var G=[
-  // FAMILIAS (ordenadas de mayor a menor cantidad)
-  {id:"g18",n:"SALINAS - ALEMÁN",q:5,p:"+50488206314"},
-  {id:"g1",n:"AMADOR - MÉNDEZ",q:3,p:"+50495469716"},
-  {id:"g7",n:"IRAHETA - VÁZQUEZ",q:3,p:"+50497469411"},
-  {id:"g10",n:"LÓPEZ - ESPINAL",q:3,p:"+50492118163"},
-  {id:"g12",n:"LÓPEZ - GIRÓN",q:3,p:"+50498584538"},
-  {id:"g2",n:"CABRERA - ARANA",q:2,p:"+50495247416"},
-  {id:"g3",n:"CHIKY - GABY",q:2,p:"+50432603190"},
-  {id:"g4",n:"CARCAMO - ALY",q:2,p:"+50498566307"},
-  {id:"g5",n:"ESPINAL - OSORIO",q:2,p:"+50499314103"},
-  {id:"g6",n:"FLORES - OYUELA",q:2,p:"+50432686026"},
-  {id:"g8",n:"LAGOS - HERNÁNDEZ",q:2,p:"+50433903290"},
-  {id:"g9",n:"LÓPEZ - ALEMÁN",q:2,p:"+50497448283"},
-  {id:"g11",n:"LÓPEZ - LÓPEZ",q:2,p:"+50488153936"},
-  {id:"g13",n:"MATEO - LÓPEZ",q:2,p:"+50489973734"},
-  {id:"g14",n:"PEÑA - SEGURA",q:2,p:"+50498884451"},
-  {id:"g15",n:"PINTO - BERTRAND",q:2,p:"+50498856856"},
-  {id:"g16",n:"RAMÍREZ - CABRERA",q:2,p:"+50496124530"},
-  {id:"g17",n:"RODRÍGUEZ - BENITES",q:2,p:"+50488667732"},
-  {id:"g19",n:"SÁNCHEZ - LÓPEZ",q:2,p:"+50431781929"},
-  {id:"g20",n:"ALEX CARBAJAL",q:2,p:"+50432581837"},
-  {id:"g28",n:"DANIEL SALINAS",q:2,p:"+50488004343"},
+// ════════════════════════════════
+// LISTA NOVIO — 41 entradas, 69 personas
+// Orden: Familias (mayor→menor), Mujeres, Hombres
+// ════════════════════════════════
+var G = [
+  // FAMILIAS
+  {id:"g01",n:"SALINAS - ALEMÁN",     q:5,p:"+50488206314"},
+  {id:"g02",n:"AMADOR - MÉNDEZ",      q:3,p:"+50495469716"},
+  {id:"g03",n:"IRAHETA - VÁZQUEZ",    q:3,p:"+50497469411"},
+  {id:"g04",n:"LÓPEZ - ESPINAL",      q:3,p:"+50492118163"},
+  {id:"g05",n:"LÓPEZ - GIRÓN",        q:3,p:"+50498584538"},
+  {id:"g06",n:"CABRERA - ARANA",      q:2,p:"+50495247416"},
+  {id:"g07",n:"CHIKY - GABY",         q:2,p:"+50432603190"},
+  {id:"g08",n:"CARCAMO - ALY",        q:2,p:"+50498566307"},
+  {id:"g09",n:"ESPINAL - OSORIO",     q:2,p:"+50499314103"},
+  {id:"g10",n:"FLORES - OYUELA",      q:2,p:"+50432686026"},
+  {id:"g11",n:"LAGOS - HERNÁNDEZ",    q:2,p:"+50433903290"},
+  {id:"g12",n:"LÓPEZ - ALEMÁN",       q:2,p:"+50497448283"},
+  {id:"g13",n:"LÓPEZ - LÓPEZ",        q:2,p:"+50488153936"},
+  {id:"g14",n:"MATEO - LÓPEZ",        q:2,p:"+50489973734"},
+  {id:"g15",n:"PEÑA - SEGURA",        q:2,p:"+50498884451"},
+  {id:"g16",n:"PINTO - BERTRAND",     q:2,p:"+50498856856"},
+  {id:"g17",n:"RAMÍREZ - CABRERA",    q:2,p:"+50496124530"},
+  {id:"g18",n:"RODRÍGUEZ - BENITES",  q:2,p:"+50488667732"},
+  {id:"g19",n:"SÁNCHEZ - LÓPEZ",      q:2,p:"+50431781929"},
+  {id:"g20",n:"ALEX CARBAJAL",        q:2,p:"+50432581837"},
+  {id:"g21",n:"DANIEL SALINAS",       q:2,p:"+50488004343"},
   // MUJERES
-  {id:"g22",n:"ANALISIS ÁLVAREZ",q:1,p:"+50498846928"},
-  {id:"g26",n:"CARMEN TOMÉ",q:1,p:"+50497136962"},
-  {id:"g29",n:"DARLIN ESPINAL",q:1,p:"+50431545184"},
-  {id:"g37",n:"LILIAN MORADEL",q:1,p:"+50498068610"},
-  {id:"g38",n:"MARCELA RODRÍGUEZ",q:1,p:"+50431756210"},
-  {id:"g39",n:"RUT LÓPEZ",q:1,p:"+50431735010"},
-  {id:"g40",n:"SCARLETH CÁLIX",q:1,p:"+50433960869"},
+  {id:"g22",n:"ANALISIS ÁLVAREZ",     q:1,p:"+50498846928"},
+  {id:"g23",n:"CARMEN TOMÉ",          q:1,p:"+50497136962"},
+  {id:"g24",n:"DARLIN ESPINAL",       q:1,p:"+50431545184"},
+  {id:"g25",n:"LILIAN MORADEL",       q:1,p:"+50498068610"},
+  {id:"g26",n:"MARCELA RODRÍGUEZ",    q:1,p:"+50431756210"},
+  {id:"g27",n:"RUT LÓPEZ",            q:1,p:"+50431735010"},
+  {id:"g28",n:"SCARLETH CÁLIX",       q:1,p:"+50433960869"},
   // HOMBRES
-  {id:"g21",n:"ALLAN ORELLANA",q:1,p:"+50432843383"},
-  {id:"g23",n:"ANDRÉS RAUDALES",q:1,p:"+50498945653"},
-  {id:"g24",n:"CARLOS HERNÁNDEZ",q:1,p:"+50497230083"},
-  {id:"g25",n:"CARLOS VELÁSQUEZ",q:1,p:"+50496499653"},
-  {id:"g27",n:"CRISTHIAN LÓPEZ",q:1,p:"+50431861687"},
-  {id:"g30",n:"FERNANDO BUSTILLOS",q:1,p:"+50498938735"},
-  {id:"g31",n:"FREDDY JUÁREZ",q:1,p:"+50432775471"},
-  {id:"g32",n:"HÉCTOR MORENO",q:1,p:"+50494452652"},
-  {id:"g33",n:"JAVIER ESTRADA",q:1,p:"+50497559014"},
-  {id:"g34",n:"JOSECK RIVAS",q:1,p:"+18262701332"},
-  {id:"g35",n:"JOSUÉ NÚÑEZ",q:1,p:"+50497115366"},
-  {id:"g36",n:"JOSÉ ROMERO",q:1,p:"+50431953017"},
-  {id:"g41",n:"YERAL GODÍNEZ",q:1,p:"+50498661079"},
+  {id:"g29",n:"ALLAN ORELLANA",       q:1,p:"+50432843383"},
+  {id:"g30",n:"ANDRÉS RAUDALES",      q:1,p:"+50498945653"},
+  {id:"g31",n:"CARLOS HERNÁNDEZ",     q:1,p:"+50497230083"},
+  {id:"g32",n:"CARLOS VELÁSQUEZ",     q:1,p:"+50496499653"},
+  {id:"g33",n:"CRISTHIAN LÓPEZ",      q:1,p:"+50431861687"},
+  {id:"g34",n:"FERNANDO BUSTILLOS",   q:1,p:"+50498938735"},
+  {id:"g35",n:"FREDDY JUÁREZ",        q:1,p:"+50432775471"},
+  {id:"g36",n:"HÉCTOR MORENO",        q:1,p:"+50494452652"},
+  {id:"g37",n:"JAVIER ESTRADA",       q:1,p:"+50497559014"},
+  {id:"g38",n:"JOSECK RIVAS",         q:1,p:"+18262701332"},
+  {id:"g39",n:"JOSUÉ NÚÑEZ",          q:1,p:"+50497115366"},
+  {id:"g40",n:"JOSÉ ROMERO",          q:1,p:"+50431953017"},
+  {id:"g41",n:"YERAL GODÍNEZ",        q:1,p:"+50498661079"},
 ];
 
-var ALL=N.concat(G);
-var TOTAL=ALL.reduce(function(a,g){return a+g.q;},0);
+var ALL = N.concat(G);
+var TOTAL = ALL.reduce(function(a,g){return a+g.q;},0);
 
-var ST={
+var ST = {
   none:{l:"Sin contacto",c:"#6b7280",bg:"#f3f4f6",d:"#d1d5db"},
   seen:{l:"Vio invitación",c:"#1d6e8f",bg:"#daf0fa",d:"#50b8d8"},
-  conf:{l:"Confirmó ✓",c:"#1d6b42",bg:"#d0f0e0",d:"#40c878"},
-  pend:{l:"Pendiente",c:"#965f10",bg:"#fdefd0",d:"#e8a830"},
-  no:  {l:"No asiste",c:"#882020",bg:"#fce8e8",d:"#e07070"}
+  conf:{l:"Confirmó ✓",   c:"#1d6b42",bg:"#d0f0e0",d:"#40c878"},
+  pend:{l:"Pendiente",    c:"#965f10",bg:"#fdefd0",d:"#e8a830"},
+  no:  {l:"No asiste",   c:"#882020",bg:"#fce8e8",d:"#e07070"}
 };
 var FK=["todos","none","seen","conf","pend","no"];
 var FL=["Todos","Sin contacto","Vieron","Confirmaron","Pendientes","No asisten"];
 var tab="todos",filt="todos",drwr=null,S={};
 
-document.getElementById("sT").textContent=TOTAL;
+document.getElementById("sT").textContent = TOTAL;
 
-function setSyncStatus(st){
-  var dot=document.getElementById("syncDot");
-  var txt=document.getElementById("syncTxt");
+function setSS(st){
+  var dot=document.getElementById("syncDot"),txt=document.getElementById("syncTxt");
   dot.className="sync-dot"+(st==="on"?"":st==="off"?" off":" loading");
   txt.textContent=st==="on"?"Sincronizado en tiempo real":st==="off"?"Sin conexión":"Conectando…";
 }
@@ -338,32 +322,24 @@ function updStats(){
 
 window.setTab=function(t){
   tab=t;
-  ["todos","novia","novio"].forEach(function(k){
-    document.getElementById("tab-"+k).classList.toggle("on",k===t);
-  });
+  ["todos","novia","novio"].forEach(function(k){document.getElementById("tab-"+k).classList.toggle("on",k===t);});
   render();
 };
 
 function buildF(){
-  var h="";
-  FK.forEach(function(k,i){
-    h+='<button class="f-btn'+(filt===k?" on":"")+'" onclick="setF(\''+k+'\')">'+FL[i]+'</button>';
-  });
-  document.getElementById("fBar").innerHTML=h;
+  document.getElementById("fBar").innerHTML=FK.map(function(k,i){
+    return '<button class="f-btn'+(filt===k?" on":"")+'" onclick="setF(\''+k+'\')">'+FL[i]+'</button>';
+  }).join("");
 }
 window.setF=function(k){filt=k;buildF();render();};
 
 function pool(){return tab==="novia"?N:tab==="novio"?G:ALL;}
-
 function gs(id){return S[id]||{s:"none",note:""};}
 
 function render(){
   var q=document.getElementById("qInput").value.toLowerCase().trim();
-  var p=pool();
-  var vis=p.filter(function(g){
-    var mq=!q||g.n.toLowerCase().indexOf(q)>=0;
-    var mf=filt==="todos"||gs(g.id).s===filt;
-    return mq&&mf;
+  var vis=pool().filter(function(g){
+    return (!q||g.n.toLowerCase().indexOf(q)>=0)&&(filt==="todos"||gs(g.id).s===filt);
   });
   var w=document.getElementById("listWrap");
   if(!vis.length){w.innerHTML='<div class="empty-msg">No se encontraron invitados</div>';return;}
@@ -371,10 +347,8 @@ function render(){
   if(tab==="todos"&&filt==="todos"&&!q){
     var qN=N.reduce(function(a,g){return a+g.q;},0);
     var qG=G.reduce(function(a,g){return a+g.q;},0);
-    h+='<div class="sec-hd"><span>Lista de la Novia · '+qN+' personas</span></div>';
-    h+='<div class="list">'+cards(N)+'</div>';
-    h+='<div class="sec-hd"><span>Lista del Novio · '+qG+' personas</span></div>';
-    h+='<div class="list">'+cards(G)+'</div>';
+    h+='<div class="sec-hd"><span>Lista de la Novia · '+qN+' personas</span></div><div class="list">'+cards(N)+'</div>';
+    h+='<div class="sec-hd"><span>Lista del Novio · '+qG+' personas</span></div><div class="list">'+cards(G)+'</div>';
   } else {
     h='<div class="list">'+cards(vis)+'</div>';
   }
@@ -405,17 +379,12 @@ window.onQ=function(){
   document.getElementById("clrBtn").style.display=q?"block":"none";
   render();
 };
-window.clrQ=function(){
-  document.getElementById("qInput").value="";
-  document.getElementById("clrBtn").style.display="none";
-  render();
-};
+window.clrQ=function(){document.getElementById("qInput").value="";document.getElementById("clrBtn").style.display="none";render();};
 
 window.openD=function(id){
   var g=ALL.filter(function(x){return x.id===id;})[0];
   drwr=id;
-  var lista=N.some(function(x){return x.id===id;})?"Novia":"Novio";
-  document.getElementById("dLista").textContent="Lista "+lista;
+  document.getElementById("dLista").textContent="Lista "+(N.some(function(x){return x.id===id;})?"Novia":"Novio");
   document.getElementById("dName").textContent=g.n;
   document.getElementById("dQty").textContent=g.q+" "+(g.q===1?"persona":"personas");
   document.getElementById("noteTA").value=gs(id).note||"";
@@ -425,14 +394,13 @@ window.openD=function(id){
 };
 
 function buildSG(id){
-  var cur=gs(id).s,h="";
-  ["none","seen","conf","pend","no"].forEach(function(k){
+  var cur=gs(id).s;
+  document.getElementById("sGrid").innerHTML=["none","seen","conf","pend","no"].map(function(k){
     var v=ST[k],on=cur===k;
-    h+='<button class="s-btn'+(on?" on":"")+'" onclick="setSt(\''+id+'\',\''+k+'\')"'
+    return '<button class="s-btn'+(on?" on":"")+'" onclick="setSt(\''+id+'\',\''+k+'\')"'
       +(on?' style="border-color:'+v.d+';background:'+v.bg+';color:'+v.c+'"':"")+' >'
       +'<span class="dot" style="background:'+(on?v.d:"var(--cream-dd)")+'"></span>'+v.l+'</button>';
-  });
-  document.getElementById("sGrid").innerHTML=h;
+  }).join("");
 }
 
 function buildWA(g){
@@ -440,16 +408,14 @@ function buildWA(g){
   if(g.p&&g.p.length>3){
     var url="https://wa.me/"+g.p.replace(/\D/g,"");
     w.innerHTML='<div class="drw-lbl">WhatsApp</div>'
-      +'<div class="wa-box"><div class="wa-info">'
-      +'<div class="wa-lbl">'+g.n+'</div><div class="wa-num">'+g.p+'</div></div>'
+      +'<div class="wa-box"><div class="wa-info"><div class="wa-lbl">'+g.n+'</div><div class="wa-num">'+g.p+'</div></div>'
       +'<a class="wa-open" href="'+url+'" target="_blank">💬 Abrir</a></div>';
   } else { w.innerHTML=""; }
 }
 
 window.setSt=function(id,s){
   if(!S[id])S[id]={s:"none",note:""};
-  S[id].s=s;
-  saveGuest(id);buildSG(id);updStats();
+  S[id].s=s;saveGuest(id);buildSG(id);updStats();
 };
 
 window.closeD=function(){
@@ -474,37 +440,32 @@ async function saveGuest(id){
   try{await setDoc(doc(db,"guests",id),S[id]);}catch(e){console.error(e);}
 }
 
-// ── CONNECT ──
 function startFirestore(){
   var colRef=collection(db,"guests");
-  // Initial load
   getDocs(colRef).then(function(snap){
-    S={};
-    snap.forEach(function(d){S[d.id]=d.data();});
+    S={};snap.forEach(function(d){S[d.id]=d.data();});
     ALL.forEach(function(g){if(!S[g.id])S[g.id]={s:"none",note:""};});
-    setSyncStatus("on");render();updStats();
-  }).catch(function(e){
-    setSyncStatus("off");
+    setSS("on");render();updStats();
+  }).catch(function(){
+    setSS("off");
     ALL.forEach(function(g){if(!S[g.id])S[g.id]={s:"none",note:""};});
     render();updStats();
   });
-  // Real-time listener
   onSnapshot(colRef,function(snap){
-    S={};
-    snap.forEach(function(d){S[d.id]=d.data();});
+    S={};snap.forEach(function(d){S[d.id]=d.data();});
     ALL.forEach(function(g){if(!S[g.id])S[g.id]={s:"none",note:""};});
-    setSyncStatus("on");render();updStats();
-  },function(e){setSyncStatus("off");console.error(e);});
+    setSS("on");render();updStats();
+  },function(e){setSS("off");console.error(e);});
 }
 
 buildF();render();
-
-signInAnonymously(auth).then(function(){
-  startFirestore();
-}).catch(function(e){
-  console.error("Auth:",e);
-  startFirestore();
-});
+signInAnonymously(auth).then(startFirestore).catch(startFirestore);
 </script>
 </body>
 </html>
+HTMLEOF
+echo "done"
+Salida
+
+done
+Listo
