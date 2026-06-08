@@ -19,16 +19,12 @@
 html,body{background:var(--cream);color:var(--ink);-webkit-text-size-adjust:100%;overflow-x:hidden}
 body{font-family:'Cormorant Garamond',serif;font-weight:300;min-height:100vh}
 button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',serif;border-radius:0}
-
-/* SYNC INDICATOR */
 .sync-bar{background:var(--sage-dd);padding:6px 16px;display:flex;align-items:center;gap:8px;justify-content:center}
 .sync-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;flex-shrink:0}
 .sync-dot.off{background:#f87171}
 .sync-dot.loading{background:#fbbf24;animation:pulse 1s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .sync-txt{font-family:'Cinzel',serif;font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.6)}
-
-/* HEADER */
 .hdr{background:linear-gradient(165deg,var(--sage-dd) 0%,var(--sage-d) 50%,var(--sage) 100%);padding:44px 24px 28px;text-align:center;position:relative;overflow:hidden}
 .hdr::before{content:'';position:absolute;inset:0;opacity:.05;background-image:radial-gradient(circle,#fff 1px,transparent 1px);background-size:24px 24px;pointer-events:none}
 .hdr::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-l),transparent)}
@@ -43,15 +39,11 @@ button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',s
 .hdr-rule s:last-child{background:linear-gradient(90deg,var(--gold-l),transparent)}
 .hdr-year{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.28em;color:rgba(255,255,255,.45);display:block;margin-bottom:16px}
 .hdr-link{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border:1px solid rgba(196,170,122,.45);color:var(--gold-ll);font-family:'Cinzel',serif;font-size:8px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;background:rgba(154,132,86,.16)}
-
-/* STATS */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);background:var(--sage-dd)}
 .stat{text-align:center;padding:14px 4px;border-right:1px solid rgba(255,255,255,.07)}
 .stat:last-child{border-right:none}
 .stat-n{display:block;font-family:'Cinzel',serif;font-size:24px;font-weight:600;line-height:1}
 .stat-l{display:block;font-family:'Cinzel',serif;font-size:6px;letter-spacing:.13em;text-transform:uppercase;margin-top:4px;opacity:.45;color:#fff}
-
-/* PROGRESS */
 .prog-box{background:var(--white);border-bottom:1px solid var(--border)}
 .prog-row{padding:10px 18px;display:flex;align-items:center;gap:12px}
 .prog-row+.prog-row{border-top:1px solid var(--cream-dd)}
@@ -59,13 +51,9 @@ button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',s
 .prog-track{flex:1;height:4px;background:var(--cream-dd);border-radius:99px;overflow:hidden}
 .prog-fill{height:100%;border-radius:99px;transition:width .5s ease}
 .prog-pct{font-family:'Cinzel',serif;font-size:10px;font-weight:600;color:var(--sage);width:30px;text-align:right}
-
-/* TABS */
 .tabs{background:var(--white);border-bottom:2px solid var(--cream-dd);display:flex}
 .tab-btn{flex:1;padding:13px 6px;font-family:'Cinzel',serif;font-size:7.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap}
 .tab-btn.on{color:var(--sage-d);border-bottom-color:var(--sage)}
-
-/* CONTROLS */
 .controls{padding:14px 16px 0;background:var(--cream)}
 .search-wrap{display:flex;align-items:center;gap:10px;background:var(--white);border:1px solid var(--border);border-radius:6px;padding:12px 16px;box-shadow:0 1px 5px rgba(86,102,75,.07)}
 .search-wrap input{border:none;outline:none;background:transparent;font-size:16px;color:var(--ink);flex:1;font-style:italic;min-width:0}
@@ -75,13 +63,9 @@ button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',s
 .filters::-webkit-scrollbar{display:none}
 .f-btn{flex-shrink:0;padding:7px 14px;border:1px solid var(--border);background:var(--white);color:var(--muted);font-family:'Cinzel',serif;font-size:7px;letter-spacing:.13em;text-transform:uppercase;cursor:pointer;transition:all .2s}
 .f-btn.on{background:var(--sage);border-color:var(--sage);color:var(--white)}
-
-/* SECTION HEADING */
 .sec-hd{display:flex;align-items:center;gap:10px;padding:16px 16px 8px}
 .sec-hd span{font-family:'Cinzel',serif;font-size:7px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage-l);white-space:nowrap}
 .sec-hd::before,.sec-hd::after{content:'';flex:1;height:1px;background:var(--cream-dd)}
-
-/* CARDS */
 .list{padding:0 16px 140px}
 .card{background:var(--white);border-radius:8px;margin-bottom:9px;padding:15px 13px;display:flex;align-items:center;gap:11px;box-shadow:0 1px 5px rgba(86,102,75,.08);cursor:pointer;border-left:3px solid var(--cream-dd);transition:border-color .2s;-webkit-user-select:none;user-select:none}
 .card-num{width:22px;text-align:center;flex-shrink:0;font-family:'Cinzel',serif;font-size:10px;color:var(--sage-l);font-weight:600}
@@ -95,8 +79,6 @@ button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',s
 .arr{color:var(--cream-dd);font-size:20px;flex-shrink:0;margin-left:2px}
 .empty-msg{text-align:center;padding:60px 20px;color:var(--sage-ll);font-style:italic;font-size:17px}
 .loading-msg{text-align:center;padding:50px 20px;color:var(--sage-l);font-family:'Cinzel',serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase}
-
-/* DRAWER */
 .overlay{position:fixed;inset:0;z-index:200;display:none}
 .overlay.open{display:block}
 .ov-bg{position:absolute;inset:0;background:rgba(26,38,22,.58)}
@@ -124,21 +106,17 @@ button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',s
 .note-ta::placeholder{color:var(--sage-ll);font-style:italic}
 .note-ta:focus{border-color:var(--sage-l)}
 .save-btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--sage-dd),var(--sage));color:var(--white);border:none;border-radius:6px;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;box-shadow:0 4px 14px rgba(42,51,38,.26);margin-bottom:6px}
-
-/* TOAST */
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(14px);background:var(--sage-dd);color:var(--gold-ll);padding:11px 24px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:.2em;text-transform:uppercase;opacity:0;transition:all .3s;z-index:300;white-space:nowrap;pointer-events:none;border:1px solid var(--sage-l);box-shadow:0 4px 18px rgba(26,38,22,.32)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
 
-<!-- SYNC BAR -->
 <div class="sync-bar">
   <div class="sync-dot loading" id="syncDot"></div>
   <span class="sync-txt" id="syncTxt">Conectando…</span>
 </div>
 
-<!-- HEADER -->
 <div class="hdr">
   <span class="hdr-pre">✦ Control de Asistencia ✦</span>
   <div class="hdr-photo">💍</div>
@@ -148,15 +126,13 @@ button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',s
   <a class="hdr-link" href="https://boda-lopez-pinzon.my.canva.site/copia-de-boda-lopez-pinzon" target="_blank">🔗 Ver invitación</a>
 </div>
 
-<!-- STATS -->
 <div class="stats">
-  <div class="stat"><span class="stat-n" id="sT" style="color:var(--gold-ll)">126</span><span class="stat-l">Personas</span></div>
+  <div class="stat"><span class="stat-n" id="sT" style="color:var(--gold-ll)">128</span><span class="stat-l">Personas</span></div>
   <div class="stat"><span class="stat-n" id="sS" style="color:#a8d4b8">0</span><span class="stat-l">Contactados</span></div>
   <div class="stat"><span class="stat-n" id="sC" style="color:#7fcca0">0</span><span class="stat-l">Confirmaron</span></div>
   <div class="stat"><span class="stat-n" id="sP" style="color:#f0c878">0</span><span class="stat-l">Pendientes</span></div>
 </div>
 
-<!-- PROGRESS -->
 <div class="prog-box">
   <div class="prog-row">
     <span class="prog-lbl">Contactados</span>
@@ -170,14 +146,12 @@ button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',s
   </div>
 </div>
 
-<!-- TABS -->
 <div class="tabs">
   <button class="tab-btn on" id="tab-todos" onclick="setTab('todos')">Todos</button>
   <button class="tab-btn" id="tab-novia" onclick="setTab('novia')">Lista Novia</button>
   <button class="tab-btn" id="tab-novio" onclick="setTab('novio')">Lista Novio</button>
 </div>
 
-<!-- CONTROLS -->
 <div class="controls">
   <div class="search-wrap">
     <span style="color:var(--sage-ll);font-size:14px;flex-shrink:0">✦</span>
@@ -189,7 +163,6 @@ button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',s
 
 <div id="listWrap"><div class="loading-msg">✦ Cargando invitados ✦</div></div>
 
-<!-- DRAWER -->
 <div class="overlay" id="overlay">
   <div class="ov-bg" onclick="closeD()"></div>
   <div class="drawer">
@@ -214,7 +187,6 @@ button,input,textarea{-webkit-appearance:none;font-family:'Cormorant Garamond',s
 </div>
 <div class="toast" id="toast">Guardado ✦</div>
 
-<!-- FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, doc, setDoc, getDocs, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
@@ -233,81 +205,86 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-// Sign in anonymously first, then connect to Firestore
-signInAnonymously(auth).then(function(){
-  startFirestore();
-}).catch(function(err){
-  console.error("Auth error:", err);
-  // Try connecting anyway
-  startFirestore();
-});
-
-function startFirestore(){
+// ── LISTA NOVIA — Familias primero (mayor cantidad primero), luego mujeres, luego hombres ──
 var N=[
+  // FAMILIAS (ordenadas de mayor a menor cantidad)
+  {id:"n10",n:"ORTEGA - GARCIA",q:4,p:"+50494352083"},
   {id:"n1",n:"ALMENDARES - RODRIGUEZ",q:3,p:"+50433232764"},
   {id:"n2",n:"ALMENDARES - CANALES",q:3,p:"+50431465417"},
-  {id:"n3",n:"ALMENDARES - TORRES",q:2,p:"+50488483664"},
-  {id:"n4",n:"ANDRADRE - AVILEZ",q:3,p:"+50488300230"},
+  {id:"n6",n:"ALMEDARES PEREIRA",q:3,p:"+50488331138"},
+  {id:"n12",n:"RAMIREZ - ALMENDARES",q:3,p:"+50489259901"},
+  {id:"n21",n:"ANDRADRE - AVILEZ",q:3,p:"+50488300230"},
   {id:"n5",n:"EMERSON CARIAS - FANNY GARCIA",q:2,p:"+50488057781"},
-  {id:"n6",n:"GARCIA - ESPINAL",q:2,p:"+50487349501"},
   {id:"n7",n:"GODOY - ZAVALA",q:2,p:"+50488698341"},
   {id:"n8",n:"JOSUE ALMENDARES & DANIEL CRUZ",q:2,p:"+50432687029"},
-  {id:"n9",n:"LUIS VALERIANO Y ESPOSA",q:2,p:"+50488325160"},
-  {id:"n10",n:"ORTEGA - GARCIA",q:4,p:"+50494352083"},
-  {id:"n11",n:"PEREZ - PINZÓN",q:2,p:"+50432808317"},
-  {id:"n12",n:"RAMIREZ - ALMENDARES",q:3,p:"+50489259901"},
-  {id:"n13",n:"ZELAYA - GODOY",q:2,p:"+50497082202"},
-  {id:"n14",n:"ALMEDARES PEREIRA",q:3,p:"+50488331138"},
-  {id:"n15",n:"CARMEN MEJÍA",q:1,p:"+50496667118"},
-  {id:"n16",n:"CLAUDINA RIERA",q:1,p:"+50489005005"},
-  {id:"n17",n:"CRISTIAN MEMBREÑO",q:1,p:"+50433869775"},
-  {id:"n18",n:"ENA MEMBREÑO",q:1,p:"+50431621958"},
-  {id:"n19",n:"ESWEN PINZÓN",q:1,p:"+50431562187"},
-  {id:"n20",n:"FELIX GARCIA",q:2,p:"+50492337717"},
-  {id:"n21",n:"GENESIS ESPAÑA",q:1,p:"+50431852770"},
-  {id:"n22",n:"JENNIFER CARIAS",q:2,p:"+50499971478"},
-  {id:"n23",n:"JUAN CARLOS AGUILAR",q:1,p:"+50495628996"},
+  {id:"n3",n:"ALMENDARES - TORRES",q:2,p:"+50488483664"},
   {id:"n24",n:"KARLA ALMENDARES",q:2,p:"+34647190648"},
+  {id:"n13",n:"ACOSTA - DURON",q:2,p:"+50431728529"},
+  {id:"n14",n:"PEREZ - PINZÓN",q:2,p:"+50432808317"},
+  {id:"n22",n:"JENNIFER CARIAS",q:2,p:"+50499971478"},
+  {id:"n4",n:"ANDRADRE - AVILEZ",q:2,p:"+50488300230"},
+  {id:"n20",n:"FELIX GARCIA",q:2,p:"+50492337717"},
+  {id:"n34",n:"LUIS VALERIANO Y ESPOSA",q:2,p:"+50488325160"},
+  {id:"n23",n:"ZELAYA - GODOY",q:2,p:"+50497082202"},
+  {id:"n24b",n:"GARCIA - ESPINAL",q:2,p:"+50487349501"},
+  // MUJERES
+  {id:"n15",n:"CARMEN MEJÍA",q:1,p:"+50496667118"},
+  {id:"n18",n:"ENA MEMBREÑO",q:1,p:"+50431621958"},
+  {id:"n21b",n:"GENESIS ESPAÑA",q:1,p:"+50431852770"},
   {id:"n25",n:"KEILA AVILA",q:1,p:"+50499933007"},
   {id:"n26",n:"MERLIN MATAMOROS",q:1,p:"+19017451405"},
-  {id:"n27",n:"MOISES LAINEZ",q:1,p:"+50487304707"},
   {id:"n28",n:"NINFA DISCUA",q:1,p:"+50496618406"},
-  {id:"n29",n:"RONALD REYES",q:1,p:"+50497450082"},
-  {id:"n30",n:"TANIA PADILLA",q:1,p:"+50494219125"},
-  {id:"n31",n:"TERESA SANCHEZ",q:1,p:"+50432288157"},
+  {id:"n31",n:"CLAUDINA RIERA",q:1,p:"+50489005005"},
   {id:"n32",n:"YESSENIA GARCIA",q:1,p:"+50488639750"},
-  {id:"n33",n:"YOLANDA PEREIRA",q:1,p:"+50498253421"}
+  {id:"n33",n:"TERESA SANCHEZ",q:1,p:"+50432288157"},
+  {id:"n5b",n:"YOLANDA PEREIRA",q:1,p:"+50498253421"},
+  {id:"n30",n:"TANIA PADILLA",q:1,p:"+50494219125"},
+  // HOMBRES
+  {id:"n16",n:"MOISES LAINEZ",q:1,p:"+50487304707"},
+  {id:"n17",n:"CRISTIAN MEMBREÑO",q:1,p:"+50433869775"},
+  {id:"n19",n:"ESWEN PINZÓN",q:1,p:"+50431562187"},
+  {id:"n23b",n:"JUAN CARLOS AGUILAR",q:1,p:"+50495628996"},
+  {id:"n29",n:"RONALD REYES",q:1,p:"+50497450082"},
 ];
+
+// ── LISTA NOVIO — Familias primero (mayor cantidad primero), luego mujeres, luego hombres ──
 var G=[
-  {id:"g1",n:"AMADOR-MÉNDEZ",q:3,p:"+50495469716"},
-  {id:"g2",n:"CABRERA-ARANA",q:2,p:"+50495247416"},
-  {id:"g3",n:"CHIKY Y GABY",q:2,p:"+50432603190"},
-  {id:"g4",n:"CARCAMO",q:2,p:"+50498566307"},
-  {id:"g5",n:"ESPINAL-OSORIO",q:2,p:"+50499314103"},
-  {id:"g6",n:"FLORES OYUELA",q:2,p:"+50432686026"},
-  {id:"g7",n:"IRAHETA-VÁZQUEZ",q:3,p:"+50497469411"},
-  {id:"g8",n:"LAGOS HERNÁNDEZ",q:2,p:"+50433903290"},
-  {id:"g9",n:"LÓPEZ-ALEMÁN",q:2,p:"+50497448283"},
-  {id:"g10",n:"LÓPEZ-ESPINAL",q:3,p:"+50492118163"},
-  {id:"g11",n:"LÓPEZ-LÓPEZ",q:2,p:""},
-  {id:"g12",n:"LÓPEZ-GIRÓN",q:3,p:"+50498584538"},
-  {id:"g13",n:"MATEO-LÓPEZ",q:2,p:"+50489973734"},
-  {id:"g14",n:"PEÑA SEGURA",q:2,p:"+50498884451"},
-  {id:"g15",n:"PINTO-BERTRAND",q:2,p:"+50498856856"},
-  {id:"g16",n:"RAMÍREZ-CABRERA",q:2,p:"+50496124530"},
-  {id:"g17",n:"RODRÍGUEZ BENITES",q:2,p:"+50488667732"},
-  {id:"g18",n:"SALINAS-ALEMÁN",q:5,p:"+50488206314"},
-  {id:"g19",n:"SÁNCHEZ-LÓPEZ",q:2,p:"+50431781929"},
+  // FAMILIAS (ordenadas de mayor a menor cantidad)
+  {id:"g18",n:"SALINAS - ALEMÁN",q:5,p:"+50488206314"},
+  {id:"g1",n:"AMADOR - MÉNDEZ",q:3,p:"+50495469716"},
+  {id:"g7",n:"IRAHETA - VÁZQUEZ",q:3,p:"+50497469411"},
+  {id:"g10",n:"LÓPEZ - ESPINAL",q:3,p:"+50492118163"},
+  {id:"g12",n:"LÓPEZ - GIRÓN",q:3,p:"+50498584538"},
+  {id:"g2",n:"CABRERA - ARANA",q:2,p:"+50495247416"},
+  {id:"g3",n:"CHIKY - GABY",q:2,p:"+50432603190"},
+  {id:"g4",n:"CARCAMO - ALY",q:2,p:"+50498566307"},
+  {id:"g5",n:"ESPINAL - OSORIO",q:2,p:"+50499314103"},
+  {id:"g6",n:"FLORES - OYUELA",q:2,p:"+50432686026"},
+  {id:"g8",n:"LAGOS - HERNÁNDEZ",q:2,p:"+50433903290"},
+  {id:"g9",n:"LÓPEZ - ALEMÁN",q:2,p:"+50497448283"},
+  {id:"g11",n:"LÓPEZ - LÓPEZ",q:2,p:"+50488153936"},
+  {id:"g13",n:"MATEO - LÓPEZ",q:2,p:"+50489973734"},
+  {id:"g14",n:"PEÑA - SEGURA",q:2,p:"+50498884451"},
+  {id:"g15",n:"PINTO - BERTRAND",q:2,p:"+50498856856"},
+  {id:"g16",n:"RAMÍREZ - CABRERA",q:2,p:"+50496124530"},
+  {id:"g17",n:"RODRÍGUEZ - BENITES",q:2,p:"+50488667732"},
+  {id:"g19",n:"SÁNCHEZ - LÓPEZ",q:2,p:"+50431781929"},
   {id:"g20",n:"ALEX CARBAJAL",q:2,p:"+50432581837"},
-  {id:"g21",n:"ALLAN ORELLANA",q:1,p:"+50432843383"},
+  {id:"g28",n:"DANIEL SALINAS",q:2,p:"+50488004343"},
+  // MUJERES
   {id:"g22",n:"ANALISIS ÁLVAREZ",q:1,p:"+50498846928"},
+  {id:"g26",n:"CARMEN TOMÉ",q:1,p:"+50497136962"},
+  {id:"g29",n:"DARLIN ESPINAL",q:1,p:"+50431545184"},
+  {id:"g37",n:"LILIAN MORADEL",q:1,p:"+50498068610"},
+  {id:"g38",n:"MARCELA RODRÍGUEZ",q:1,p:"+50431756210"},
+  {id:"g39",n:"RUT LÓPEZ",q:1,p:"+50431735010"},
+  {id:"g40",n:"SCARLETH CÁLIX",q:1,p:"+50433960869"},
+  // HOMBRES
+  {id:"g21",n:"ALLAN ORELLANA",q:1,p:"+50432843383"},
   {id:"g23",n:"ANDRÉS RAUDALES",q:1,p:"+50498945653"},
   {id:"g24",n:"CARLOS HERNÁNDEZ",q:1,p:"+50497230083"},
   {id:"g25",n:"CARLOS VELÁSQUEZ",q:1,p:"+50496499653"},
-  {id:"g26",n:"CARMEN TOMÉ",q:1,p:"+50497136962"},
   {id:"g27",n:"CRISTHIAN LÓPEZ",q:1,p:"+50431861687"},
-  {id:"g28",n:"DANIEL SALINAS",q:2,p:"+50488004343"},
-  {id:"g29",n:"DARLIN ESPINAL",q:1,p:"+50431545184"},
   {id:"g30",n:"FERNANDO BUSTILLOS",q:1,p:"+50498938735"},
   {id:"g31",n:"FREDDY JUÁREZ",q:1,p:"+50432775471"},
   {id:"g32",n:"HÉCTOR MORENO",q:1,p:"+50494452652"},
@@ -315,13 +292,11 @@ var G=[
   {id:"g34",n:"JOSECK RIVAS",q:1,p:"+18262701332"},
   {id:"g35",n:"JOSUÉ NÚÑEZ",q:1,p:"+50497115366"},
   {id:"g36",n:"JOSÉ ROMERO",q:1,p:"+50431953017"},
-  {id:"g37",n:"LILIAN MORADEL",q:1,p:"+50498068610"},
-  {id:"g38",n:"MARCELA RODRÍGUEZ",q:1,p:"+50431756210"},
-  {id:"g39",n:"RUT LÓPEZ",q:1,p:"+50431735010"},
-  {id:"g40",n:"SCARLETH CÁLIX",q:1,p:"+50433960869"},
-  {id:"g41",n:"YERAL GODÍNEZ",q:1,p:"+50498661079"}
+  {id:"g41",n:"YERAL GODÍNEZ",q:1,p:"+50498661079"},
 ];
+
 var ALL=N.concat(G);
+var TOTAL=ALL.reduce(function(a,g){return a+g.q;},0);
 
 var ST={
   none:{l:"Sin contacto",c:"#6b7280",bg:"#f3f4f6",d:"#d1d5db"},
@@ -332,58 +307,17 @@ var ST={
 };
 var FK=["todos","none","seen","conf","pend","no"];
 var FL=["Todos","Sin contacto","Vieron","Confirmaron","Pendientes","No asisten"];
-var tab="todos", filt="todos", drwr=null;
-var S={};
+var tab="todos",filt="todos",drwr=null,S={};
 
-// ── SYNC STATUS ──
-function setSyncStatus(status){
+document.getElementById("sT").textContent=TOTAL;
+
+function setSyncStatus(st){
   var dot=document.getElementById("syncDot");
   var txt=document.getElementById("syncTxt");
-  dot.className="sync-dot";
-  if(status==="on"){dot.classList.add("");txt.textContent="Sincronizado en tiempo real";}
-  else if(status==="off"){dot.classList.add("off");txt.textContent="Sin conexión";}
-  else{dot.classList.add("loading");txt.textContent="Conectando…";}
+  dot.className="sync-dot"+(st==="on"?"":st==="off"?" off":" loading");
+  txt.textContent=st==="on"?"Sincronizado en tiempo real":st==="off"?"Sin conexión":"Conectando…";
 }
 
-// ── FIRESTORE ──
-const colRef = collection(db, "guests");
-
-// First load with getDocs (more reliable on first open)
-getDocs(colRef).then(function(snapshot){
-  S = {};
-  snapshot.forEach(function(docSnap){ S[docSnap.id] = docSnap.data(); });
-  ALL.forEach(function(g){ if(!S[g.id]) S[g.id]={s:"none",note:""}; });
-  setSyncStatus("on");
-  render();
-  updStats();
-}).catch(function(err){
-  setSyncStatus("off");
-  ALL.forEach(function(g){ if(!S[g.id]) S[g.id]={s:"none",note:""}; });
-  render();
-  updStats();
-});
-
-// Then keep listening for real-time changes
-onSnapshot(colRef, function(snapshot){
-  S = {};
-  snapshot.forEach(function(docSnap){ S[docSnap.id] = docSnap.data(); });
-  ALL.forEach(function(g){ if(!S[g.id]) S[g.id]={s:"none",note:""}; });
-  setSyncStatus("on");
-  render();
-  updStats();
-}, function(err){
-  setSyncStatus("off");
-  console.error(err);
-});
-
-// ── SAVE TO FIRESTORE ──
-async function saveGuest(id){
-  try{
-    await setDoc(doc(db,"guests",id), S[id]);
-  }catch(e){ console.error(e); }
-}
-
-// ── STATS ──
 function updStats(){
   var seen=0,conf=0,pend=0,n=ALL.length;
   ALL.forEach(function(g){
@@ -402,7 +336,6 @@ function updStats(){
   document.getElementById("ppC").textContent=cp+"%";
 }
 
-// ── TABS ──
 window.setTab=function(t){
   tab=t;
   ["todos","novia","novio"].forEach(function(k){
@@ -411,7 +344,6 @@ window.setTab=function(t){
   render();
 };
 
-// ── FILTERS ──
 function buildF(){
   var h="";
   FK.forEach(function(k,i){
@@ -419,17 +351,18 @@ function buildF(){
   });
   document.getElementById("fBar").innerHTML=h;
 }
-window.setF=function(k){ filt=k; buildF(); render(); };
+window.setF=function(k){filt=k;buildF();render();};
 
-// ── RENDER ──
-function pool(){ return tab==="novia"?N:tab==="novio"?G:ALL; }
+function pool(){return tab==="novia"?N:tab==="novio"?G:ALL;}
+
+function gs(id){return S[id]||{s:"none",note:""};}
 
 function render(){
   var q=document.getElementById("qInput").value.toLowerCase().trim();
   var p=pool();
   var vis=p.filter(function(g){
     var mq=!q||g.n.toLowerCase().indexOf(q)>=0;
-    var mf=filt==="todos"||(S[g.id]||{s:"none"}).s===filt;
+    var mf=filt==="todos"||gs(g.id).s===filt;
     return mq&&mf;
   });
   var w=document.getElementById("listWrap");
@@ -448,11 +381,9 @@ function render(){
   w.innerHTML=h;
 }
 
-function gs(id){ return S[id]||{s:"none",note:""}; }
-
 function cards(arr){
   return arr.map(function(g,i){
-    var d=gs(g.id), st=ST[d.s]||ST.none;
+    var d=gs(g.id),st=ST[d.s]||ST.none;
     var wp=g.p&&g.p.length>3?"https://wa.me/"+g.p.replace(/\D/g,""):"";
     return '<div class="card" style="border-left-color:'+st.d+'" onclick="openD(\''+g.id+'\')">'
       +'<div class="card-num">'+(i+1)+'</div>'
@@ -480,7 +411,6 @@ window.clrQ=function(){
   render();
 };
 
-// ── DRAWER ──
 window.openD=function(id){
   var g=ALL.filter(function(x){return x.id===id;})[0];
   drwr=id;
@@ -489,20 +419,18 @@ window.openD=function(id){
   document.getElementById("dName").textContent=g.n;
   document.getElementById("dQty").textContent=g.q+" "+(g.q===1?"persona":"personas");
   document.getElementById("noteTA").value=gs(id).note||"";
-  buildSG(id);
-  buildWA(g);
+  buildSG(id);buildWA(g);
   document.getElementById("overlay").classList.add("open");
   document.body.style.overflow="hidden";
 };
 
 function buildSG(id){
-  var cur=gs(id).s, h="";
+  var cur=gs(id).s,h="";
   ["none","seen","conf","pend","no"].forEach(function(k){
-    var v=ST[k], on=cur===k;
+    var v=ST[k],on=cur===k;
     h+='<button class="s-btn'+(on?" on":"")+'" onclick="setSt(\''+id+'\',\''+k+'\')"'
       +(on?' style="border-color:'+v.d+';background:'+v.bg+';color:'+v.c+'"':"")+' >'
-      +'<span class="dot" style="background:'+(on?v.d:"var(--cream-dd)")+'"></span>'
-      +v.l+'</button>';
+      +'<span class="dot" style="background:'+(on?v.d:"var(--cream-dd)")+'"></span>'+v.l+'</button>';
   });
   document.getElementById("sGrid").innerHTML=h;
 }
@@ -513,30 +441,26 @@ function buildWA(g){
     var url="https://wa.me/"+g.p.replace(/\D/g,"");
     w.innerHTML='<div class="drw-lbl">WhatsApp</div>'
       +'<div class="wa-box"><div class="wa-info">'
-      +'<div class="wa-lbl">'+g.n+'</div>'
-      +'<div class="wa-num">'+g.p+'</div></div>'
+      +'<div class="wa-lbl">'+g.n+'</div><div class="wa-num">'+g.p+'</div></div>'
       +'<a class="wa-open" href="'+url+'" target="_blank">💬 Abrir</a></div>';
   } else { w.innerHTML=""; }
 }
 
 window.setSt=function(id,s){
-  if(!S[id]) S[id]={s:"none",note:""};
+  if(!S[id])S[id]={s:"none",note:""};
   S[id].s=s;
-  saveGuest(id);
-  buildSG(id);
-  updStats();
+  saveGuest(id);buildSG(id);updStats();
 };
 
 window.closeD=function(){
   if(drwr){
-    if(!S[drwr]) S[drwr]={s:"none",note:""};
+    if(!S[drwr])S[drwr]={s:"none",note:""};
     S[drwr].note=document.getElementById("noteTA").value.trim();
     saveGuest(drwr);
   }
   document.getElementById("overlay").classList.remove("open");
   document.body.style.overflow="";
-  drwr=null;
-  render();
+  drwr=null;render();
 };
 
 window.saveD=function(){
@@ -546,10 +470,41 @@ window.saveD=function(){
   setTimeout(function(){t.classList.remove("show");},2000);
 };
 
-// INIT - show 0s until Firebase loads, then update
-buildF();
-render();
-} // end startFirestore
+async function saveGuest(id){
+  try{await setDoc(doc(db,"guests",id),S[id]);}catch(e){console.error(e);}
+}
+
+// ── CONNECT ──
+function startFirestore(){
+  var colRef=collection(db,"guests");
+  // Initial load
+  getDocs(colRef).then(function(snap){
+    S={};
+    snap.forEach(function(d){S[d.id]=d.data();});
+    ALL.forEach(function(g){if(!S[g.id])S[g.id]={s:"none",note:""};});
+    setSyncStatus("on");render();updStats();
+  }).catch(function(e){
+    setSyncStatus("off");
+    ALL.forEach(function(g){if(!S[g.id])S[g.id]={s:"none",note:""};});
+    render();updStats();
+  });
+  // Real-time listener
+  onSnapshot(colRef,function(snap){
+    S={};
+    snap.forEach(function(d){S[d.id]=d.data();});
+    ALL.forEach(function(g){if(!S[g.id])S[g.id]={s:"none",note:""};});
+    setSyncStatus("on");render();updStats();
+  },function(e){setSyncStatus("off");console.error(e);});
+}
+
+buildF();render();
+
+signInAnonymously(auth).then(function(){
+  startFirestore();
+}).catch(function(e){
+  console.error("Auth:",e);
+  startFirestore();
+});
 </script>
 </body>
 </html>
